@@ -29,8 +29,8 @@ export default function TrustSection() {
   
   const statementRefs = useRef<HTMLDivElement[]>([]);
   const principlesRef = useRef<HTMLDivElement>(null);
-  const bottomDividerRef = useRef<HTMLDivElement>(null);
-  const footerTextRef = useRef<HTMLDivElement>(null);
+
+
 
   const addToHeadingRefs = (el: HTMLSpanElement | null) => {
     if (el && !headingRefs.current.includes(el)) headingRefs.current.push(el);
@@ -126,8 +126,6 @@ export default function TrustSection() {
 
       // 6. Ending Elements
       gsap.set(principlesRef.current, { opacity: 0, y: 20 });
-      gsap.set(bottomDividerRef.current, { scaleX: 0, transformOrigin: 'left center' });
-      gsap.set(footerTextRef.current, { opacity: 0, y: 10 });
 
       gsap.to(principlesRef.current, {
         scrollTrigger: {
@@ -140,16 +138,6 @@ export default function TrustSection() {
         ease: 'power3.out'
       });
 
-      const endTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: bottomDividerRef.current,
-          start: "top 95%",
-        }
-      });
-
-      endTl.to(bottomDividerRef.current, { scaleX: 1, duration: 1, ease: 'power3.out' })
-           .to(footerTextRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, "-=0.6");
-
     });
 
     // Reduced motion fallback
@@ -157,7 +145,7 @@ export default function TrustSection() {
       gsap.set([
         container.current, topDividerRef.current, eyebrowRef.current, ...headingRefs.current,
         copyRef.current, ...stageRefs.current, ...statementRefs.current, principlesRef.current, 
-        bottomDividerRef.current, footerTextRef.current, bgTextRef.current
+        bgTextRef.current
       ], { 
         opacity: 1, 
         y: 0, 
@@ -249,9 +237,9 @@ export default function TrustSection() {
         </div>
 
         {/* Supporting Statement & Footer */}
-        <div className="mt-20 md:mt-32 flex flex-col items-start md:items-end md:text-right w-full">
+        <div className="mt-12 md:mt-20 flex flex-col items-start md:items-end md:text-right w-full">
           
-          <div ref={principlesRef} className="w-full border-y border-brand-silver/20 py-8 md:py-12 mb-24 md:mb-32">
+          <div ref={principlesRef} className="w-full border-y border-brand-silver/20 py-6 md:py-10">
             <div className="flex flex-wrap items-center justify-center md:justify-end gap-6 md:gap-12 text-sm md:text-base font-display font-bold tracking-[0.2em] uppercase text-brand-gold">
               <span>INDEPENDENT</span>
               <span className="w-1.5 h-1.5 rounded-full bg-brand-silver/50 hidden md:block" />
@@ -261,16 +249,6 @@ export default function TrustSection() {
               <span className="w-1.5 h-1.5 rounded-full bg-brand-silver/50 hidden md:block" />
               <span>TRANSPARENT</span>
             </div>
-          </div>
-
-          <div className="w-full">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-4 mb-8">
-              <div ref={footerTextRef} className="text-xs md:text-sm font-medium tracking-[0.2em] uppercase text-brand-silver">
-                <span>VMONE / PHILOSOPHY</span>
-              </div>
-            </div>
-            
-            <div ref={bottomDividerRef} className="w-full h-px bg-brand-silver/30" />
           </div>
         </div>
 

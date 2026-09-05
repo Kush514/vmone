@@ -128,3 +128,180 @@
     padding-bottom: clamp(3rem, 6vw, 4rem);
   }
 }
+
+/* =========================================
+   GLOBAL THEME OVERRIDES
+   ========================================= */
+
+/* 1. CURRENT (NOIR) - Default Theme is already defined in @theme block */
+
+/* 2. PRINT MAGAZINE */
+[data-global-theme="print"] {
+  --color-primary-dark: #FFFFFF;
+  --color-secondary-dark: #F8F8F8;
+  --color-brand-gold: #D4AF37;
+  --color-brand-silver: #666666;
+  --color-pure-white: #222222;
+  --color-muted-light: #555555;
+  --color-muted-dark: #EAEAEA;
+}
+/* Print Alternating (Cream) */
+[data-global-theme="print"] [data-theme="golden"],
+[data-theme="golden"][data-global-theme="print"] {
+  --color-primary-dark: #FDFBF7;
+  --color-secondary-dark: #F5F0E6;
+  --color-brand-gold: #D4AF37;
+  --color-pure-white: #222222;
+  --color-brand-silver: #666666;
+  --color-muted-light: #555555;
+  --color-muted-dark: #EAEAEA;
+}
+
+/* 3. STONE STUDIO */
+[data-global-theme="stone"] {
+  --color-primary-dark: #F9F9F6;
+  --color-secondary-dark: #F0F0EB;
+  --color-brand-gold: #C5A059;
+  --color-pure-white: #2B1E16;
+  --color-brand-silver: #7A695C;
+  --color-muted-light: #5C4D42;
+  --color-muted-dark: #E3E3DE;
+}
+/* Stone Alternating (Dove Grey) */
+[data-global-theme="stone"] [data-theme="golden"],
+[data-theme="golden"][data-global-theme="stone"] {
+  --color-primary-dark: #EBEBE8;
+  --color-secondary-dark: #E0E0DB;
+  --color-brand-gold: #C5A059;
+  --color-pure-white: #2B1E16;
+  --color-brand-silver: #7A695C;
+  --color-muted-light: #5C4D42;
+  --color-muted-dark: #D6D6D1;
+}
+
+/* 4. MINIMALIST */
+[data-global-theme="minimalist"] {
+  --color-primary-dark: #FAFAFA;
+  --color-secondary-dark: #F2F2F2;
+  --color-brand-gold: #B3A369;
+  --color-pure-white: #111111;
+  --color-brand-silver: #777777;
+  --color-muted-light: #666666;
+  --color-muted-dark: #E5E5E5;
+}
+/* Minimalist Alternating (Warm Silver) */
+[data-global-theme="minimalist"] [data-theme="golden"],
+[data-theme="golden"][data-global-theme="minimalist"] {
+  --color-primary-dark: #EEEEEE;
+  --color-secondary-dark: #E5E5E5;
+  --color-brand-gold: #B3A369;
+  --color-pure-white: #111111;
+  --color-brand-silver: #777777;
+  --color-muted-light: #666666;
+  --color-muted-dark: #DDDDDD;
+}
+
+/* 5. THE HERITAGE */
+[data-global-theme="heritage"] {
+  --color-primary-dark: #1C281F;
+  --color-secondary-dark: #151E17;
+  --color-brand-gold: #C5B358;
+  --color-pure-white: #F5F5DC;
+  --color-brand-silver: #A9B0A5;
+  --color-muted-light: #A9B0A5;
+  --color-muted-dark: #2A3B2E;
+}
+[data-global-theme="heritage"] [data-theme="golden"],
+[data-theme="golden"][data-global-theme="heritage"] {
+  --color-primary-dark: #C5B358;
+  --color-secondary-dark: #B5A642;
+  --color-brand-gold: #1C281F;
+  --color-pure-white: #111A13;
+  --color-brand-silver: #4A5B4D;
+  --color-muted-light: #4A5B4D;
+  --color-muted-dark: #E6D787;
+}
+
+/* 6. THE GALLERY */
+[data-global-theme="gallery"] {
+  --color-primary-dark: #1A1A1A;
+  --color-secondary-dark: #111111;
+  --color-brand-gold: #F5F5F0;
+  --color-pure-white: #FFFFFF;
+  --color-brand-silver: #999999;
+  --color-muted-light: #A0A0A0;
+  --color-muted-dark: #2A2A2A;
+}
+[data-global-theme="gallery"] [data-theme="golden"],
+[data-theme="golden"][data-global-theme="gallery"] {
+  --color-primary-dark: #F5F5F0;
+  --color-secondary-dark: #E8E8E3;
+  --color-brand-gold: #1A1A1A;
+  --color-pure-white: #111111;
+  --color-brand-silver: #666666;
+  --color-muted-light: #555555;
+  --color-muted-dark: #E8E8E3;
+}
+
+/* 7. EARTHY BRUTALISM */
+[data-global-theme="brutalism"] {
+  --color-primary-dark: #141414;
+  --color-secondary-dark: #0A0A0A;
+  --color-brand-gold: #C4795A;
+  --color-pure-white: #F0E6D2;
+  --color-brand-silver: #8A7A72;
+  --color-muted-light: #A99F94;
+  --color-muted-dark: #2A1F1A;
+}
+[data-global-theme="brutalism"] [data-theme="golden"],
+[data-theme="golden"][data-global-theme="brutalism"] {
+  --color-primary-dark: #C4795A;
+  --color-secondary-dark: #A96245;
+  --color-brand-gold: #141414;
+  --color-pure-white: #0A0A0A;
+  --color-brand-silver: #5E3D31;
+  --color-muted-light: #3D261E;
+  --color-muted-dark: #DF9678;
+}
+
+/* 8. MIDNIGHT NAVY */
+[data-global-theme="midnight"] {
+  --color-primary-dark: #0A1128;
+  --color-secondary-dark: #060B1A;
+  --color-brand-gold: #FAF3E0;
+  --color-pure-white: #FFFFFF;
+  --color-brand-silver: #7A89AA;
+  --color-muted-light: #94A3C6;
+  --color-muted-dark: #15224A;
+}
+[data-global-theme="midnight"] [data-theme="golden"],
+[data-theme="golden"][data-global-theme="midnight"] {
+  --color-primary-dark: #FAF3E0;
+  --color-secondary-dark: #E8DFCB;
+  --color-brand-gold: #0A1128;
+  --color-pure-white: #060B1A;
+  --color-brand-silver: #6B7C9E;
+  --color-muted-light: #4A5B82;
+  --color-muted-dark: #E8DFCB;
+}
+
+/* 9. THE ANALOG */
+[data-global-theme="analog"] {
+  --color-primary-dark: #2B1E16;
+  --color-secondary-dark: #1C120D;
+  --color-brand-gold: #E8DCC4;
+  --color-pure-white: #FDFBF7;
+  --color-brand-silver: #9C897B;
+  --color-muted-light: #B8A89A;
+  --color-muted-dark: #3D2D23;
+}
+[data-global-theme="analog"] [data-theme="golden"],
+[data-theme="golden"][data-global-theme="analog"] {
+  --color-primary-dark: #E8DCC4;
+  --color-secondary-dark: #D4C6AB;
+  --color-brand-gold: #2B1E16;
+  --color-pure-white: #1C120D;
+  --color-brand-silver: #826F60;
+  --color-muted-light: #5A4A3E;
+  --color-muted-dark: #D8CBB3;
+}

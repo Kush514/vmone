@@ -22,15 +22,15 @@ const MenuButton = ({ className = "", openMenu, isMenuOpen, theme }: { className
     aria-controls="fullscreen-navigation"
     aria-label="Open navigation menu"
   >
-    <span className={`text-[11px] font-bold tracking-[0.2em] uppercase transition-colors duration-300 ${theme === 'dark' ? 'text-pure-white group-hover:text-brand-gold' : 'text-[#171717] group-hover:text-[#B8924A]'}`}>
+    <span className={`text-[11px] font-bold tracking-[0.2em] uppercase transition-colors duration-300 ${theme === 'dark' ? 'text-pure-white group-hover:text-brand-gold' : 'text-primary-dark group-hover:text-pure-white'}`}>
       MENU
     </span>
     <div className="flex flex-col justify-center gap-1.5 w-6 h-5">
       <span 
-        className={`w-full h-0.5 transition-colors duration-300 ${theme === 'dark' ? 'bg-pure-white group-hover:bg-brand-gold' : 'bg-[#171717] group-hover:bg-[#B8924A]'}`}
+        className={`w-full h-0.5 transition-colors duration-300 ${theme === 'dark' ? 'bg-pure-white group-hover:bg-brand-gold' : 'bg-primary-dark group-hover:bg-pure-white'}`}
       />
       <span 
-        className={`w-4 h-0.5 ml-auto transition-all duration-300 group-hover:w-full ${theme === 'dark' ? 'bg-pure-white group-hover:bg-brand-gold' : 'bg-[#171717] group-hover:bg-[#B8924A]'}`}
+        className={`w-4 h-0.5 ml-auto transition-all duration-300 group-hover:w-full ${theme === 'dark' ? 'bg-pure-white group-hover:bg-brand-gold' : 'bg-primary-dark group-hover:bg-pure-white'}`}
       />
     </div>
   </button>
@@ -116,7 +116,7 @@ export default function Header() {
               className="group flex flex-col items-start focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] focus-visible:ring-offset-2 min-h-[44px] justify-center"
               aria-label="VMONE Home"
             >
-              <div className={`flex items-center gap-2 font-display text-base lg:text-lg font-bold tracking-tighter uppercase leading-none transition-colors duration-300 ${theme === 'dark' ? 'text-pure-white group-hover:text-brand-gold' : 'text-[#171717] group-hover:text-[#B8924A]'}`}>
+              <div className={`flex items-center gap-2 font-display text-base lg:text-lg font-bold tracking-tighter uppercase leading-none transition-colors duration-300 ${theme === 'dark' ? 'text-pure-white group-hover:text-brand-gold' : 'text-primary-dark group-hover:text-pure-white'}`}>
                 <Image 
                   src="/logo.png" 
                   alt="VMONE Logo" 
@@ -127,7 +127,7 @@ export default function Header() {
                 />
                 <span className="mt-0.5">VMONE</span>
               </div>
-              <span className={`text-[9px] lg:text-[10px] font-bold tracking-[0.2em] uppercase mt-1 leading-none ml-0.5 transition-colors duration-300 ${theme === 'dark' ? 'text-pure-white/60 group-hover:text-brand-gold/80' : 'text-[#5F5B54] group-hover:text-[#171717]'}`}>
+              <span className={`text-[9px] lg:text-[10px] font-bold tracking-[0.2em] uppercase mt-1 leading-none ml-0.5 transition-colors duration-300 ${theme === 'dark' ? 'text-pure-white/60 group-hover:text-brand-gold/80' : 'text-muted-dark group-hover:text-primary-dark'}`}>
                 CONSUMER TECHNOLOGY
               </span>
             </Link>
@@ -147,12 +147,12 @@ export default function Header() {
                       href={link.href} 
                       className="relative group text-[11px] font-display font-bold tracking-widest uppercase py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] focus-visible:ring-offset-2"
                     >
-                      <span className={`transition-colors duration-300 ${isActive ? (theme === 'dark' ? 'text-brand-gold' : 'text-[#171717]') : (theme === 'dark' ? 'text-pure-white group-hover:text-brand-gold' : 'text-[#5F5B54] group-hover:text-[#171717]')}`}>
+                      <span className={`transition-colors duration-300 ${isActive ? (theme === 'dark' ? 'text-brand-gold' : 'text-primary-dark') : (theme === 'dark' ? 'text-pure-white group-hover:text-brand-gold' : 'text-muted-dark group-hover:text-primary-dark')}`}>
                         {link.label}
                       </span>
                       {/* Active Indicator Underline */}
                       {isActive && (
-                        <span className={`absolute -bottom-1 left-0 w-full h-[2px] ${theme === 'dark' ? 'bg-brand-gold' : 'bg-[#D2B06A]'}`} />
+                        <span className={`absolute -bottom-1 left-0 w-full h-[2px] ${theme === 'dark' ? 'bg-brand-gold' : 'bg-primary-dark'}`} />
                       )}
                     </Link>
                   );
@@ -162,7 +162,7 @@ export default function Header() {
             {/* CTA BUTTON */}
             <Link 
               href="/contact" 
-              className={`hidden lg:inline-flex font-display font-bold text-[11px] tracking-[0.15em] uppercase px-7 py-3 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${theme === 'dark' ? 'bg-brand-gold text-primary-dark hover:bg-pure-white focus-visible:ring-white focus-visible:ring-offset-primary-dark' : 'bg-[#000000] text-brand-gold hover:bg-brand-gold hover:text-[#000000] focus-visible:ring-[#000000] focus-visible:ring-offset-[#E0CD7F]'}`}
+              className={`hidden lg:inline-flex font-display font-bold text-[11px] tracking-[0.15em] uppercase px-7 py-3 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${theme === 'dark' ? 'bg-brand-gold text-primary-dark hover:bg-pure-white focus-visible:ring-white focus-visible:ring-offset-primary-dark' : 'bg-primary-dark text-brand-gold hover:bg-brand-gold hover:text-primary-dark focus-visible:ring-primary-dark focus-visible:ring-offset-brand-gold'}`}
             >
               LET&apos;S TALK
             </Link>

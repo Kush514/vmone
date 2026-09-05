@@ -26,7 +26,7 @@ export async function getChannelData(): Promise<YouTubeChannel | null> {
     const res = await fetch(
       `https://youtube.googleapis.com/youtube/v3/channels?part=snippet,statistics,contentDetails&forHandle=${HANDLE}&key=${API_KEY}`,
       { 
-        headers: { 'referer': 'https://www.vmhubllp.com/' },
+        headers: { 'referer': 'https://vmone.vercel.app/' },
         next: { revalidate: 3600 } // Cache for 1 hour
       }
     );
@@ -80,7 +80,7 @@ export async function getLatestVideos(uploadsPlaylistId: string): Promise<YouTub
     const playlistRes = await fetch(
       `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=15&key=${API_KEY}`,
       { 
-        headers: { 'referer': 'https://www.vmhubllp.com/' },
+        headers: { 'referer': 'https://vmone.vercel.app/' },
         next: { revalidate: 3600 } 
       }
     );
@@ -96,7 +96,7 @@ export async function getLatestVideos(uploadsPlaylistId: string): Promise<YouTub
     const videosRes = await fetch(
       `https://youtube.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${videoIds}&key=${API_KEY}`,
       { 
-        headers: { 'referer': 'https://www.vmhubllp.com/' },
+        headers: { 'referer': 'https://vmone.vercel.app/' },
         next: { revalidate: 3600 } 
       }
     );

@@ -277,7 +277,7 @@ export default function YoutubeContent({ channelData, latestVideos }: Props) {
                             src={video.thumbnail} 
                             alt={video.title}
                             fill
-                            className="object-cover grayscale contrast-125 transition-all duration-700 ease-out group-hover:scale-105 group-hover:grayscale-0 group-hover:contrast-100"
+                            className="object-cover transition-all duration-700 ease-out group-hover:scale-105"
                             sizes="(max-width: 1024px) 100vw, 33vw"
                             unoptimized={true}
                           />

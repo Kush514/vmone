@@ -79,7 +79,7 @@ export default function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps)
     >
       {/* Background Overlay */}
       <div 
-        className={`absolute inset-0 bg-[#000000] transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'}`}
+        className={`absolute inset-0 bg-primary-dark transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'}`}
       />
       
       <div ref={menuRef} className={`relative w-full h-full flex flex-col transition-opacity duration-500 delay-200 ${isOpen ? 'opacity-100' : 'opacity-0'}`}>

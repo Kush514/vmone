@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
+import MilestoneVisual from '@/components/ui/MilestoneVisual';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -118,10 +119,10 @@ export default function Journey() {
               THE JOURNEY
             </div>
             
-            <div className="h-[200px] xl:h-[250px] flex items-center perspective-1000">
-              <h2 className="sticky-stat font-display font-bold uppercase text-[6rem] xl:text-[9rem] text-pure-white leading-none tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-                {milestones[activeIndex].stat}
-              </h2>
+            <div className="h-[300px] xl:h-[400px] flex items-center perspective-1000">
+              <div className="sticky-stat drop-shadow-[0_0_30px_rgba(255,255,255,0.05)] origin-left scale-90 lg:scale-100 xl:scale-125">
+                <MilestoneVisual stat={milestones[activeIndex].stat} />
+              </div>
             </div>
             
             <div className="mt-8 font-serif italic text-2xl xl:text-3xl text-brand-gold/70">
@@ -152,8 +153,8 @@ export default function Journey() {
               {/* Mobile Timeline Dot */}
               <div className="lg:hidden absolute left-[-2px] top-1/2 -translate-y-1/2 w-3 h-3 bg-brand-gold rounded-full shadow-[0_0_10px_rgba(224,205,127,0.8)]" />
               
-              <div className="lg:hidden font-display text-4xl font-bold text-brand-gold/30 mb-4 tracking-tighter">
-                {item.stat}
+              <div className="lg:hidden mb-8 opacity-90 origin-left scale-75 md:scale-90 flex justify-center w-full">
+                <MilestoneVisual stat={item.stat} />
               </div>
 
               <div className="pl-8 lg:pl-0 border-l-2 border-brand-gold/0 lg:border-none transition-all duration-500">

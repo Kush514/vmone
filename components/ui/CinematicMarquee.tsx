@@ -85,7 +85,7 @@ export default function CinematicMarquee({
   };
 
   return (
-    <div 
+    <section 
       ref={containerRef}
       className={`relative w-full overflow-hidden py-4 md:py-8 flex items-center border-y border-pure-white/10 bg-primary-dark transition-colors duration-500 ${className}`}
       onMouseEnter={handleMouseEnter}
@@ -105,6 +105,6 @@ export default function CinematicMarquee({
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

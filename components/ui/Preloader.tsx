@@ -94,7 +94,7 @@ export default function Preloader() {
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 z-[99999] bg-[#000000] flex flex-col items-center justify-center pointer-events-auto"
+      className="fixed inset-0 z-[99999] bg-primary-dark flex flex-col items-center justify-center pointer-events-auto"
     >
       {/* Center Content */}
       <div ref={textRef} className="flex flex-col items-center relative z-10 w-full px-8">

@@ -16,7 +16,7 @@ export default function ContactPage() {
   ];
 
   return (
-    <main className="flex-1 bg-[#E0CD7F] text-primary-dark min-h-screen flex flex-col overflow-hidden">
+    <main className="flex-1 bg-brand-gold text-primary-dark min-h-screen flex flex-col overflow-hidden">
       <div className="container-editorial pt-20 pb-12 md:pt-32 md:pb-24 flex-1 flex flex-col">
         
         {/* Intro */}
