@@ -1,0 +1,3579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FilmyCurry</title>
+    <meta name="description" content="One-stop solution for influencer marketing, meme campaigns, and viral content that powers 32% of all OTT releases.">
+    <meta property="og:title" content="FilmyCurry">
+    <meta property="og:description" content="One-stop solution for influencer marketing, meme campaigns, and viral content that powers 32% of all OTT releases.">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://filmycurry.com/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;1,600;1,700&family=Barlow:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ================================================================
+       Filmy Curry — GLOBAL DESIGN SYSTEM v5
+       Aesthetic: Cinematic Brutalist Editorial · Olive/Cream/Ink/Amber
+    ================================================================ */
+        :root {
+            --olive: #6B7A55;
+            --olive-d: #59674A;
+            --olive-l: #7D8F65;
+            --olive-dk: #3E4A30;
+            --cream: #F2EAD8;
+            --cream-2: #EAE0C8;
+            --cream-3: #DDD4B8;
+            --ink: #1A1A10;
+            --ink-2: #232318;
+            --ink-3: #2E2E22;
+            --amber: #D4920A;
+            --amber-2: #E8A820;
+            --amber-3: #F0BC3C;
+            --white: #FAF6EC;
+
+            --bg: var(--cream);
+            --fg: var(--ink);
+            --accent: var(--amber);
+            --muted: rgba(26, 26, 16, .46);
+            --muted-2: rgba(26, 26, 16, .24);
+            --border: rgba(26, 26, 16, .12);
+            --border-2: rgba(26, 26, 16, .06);
+            --l-muted: rgba(242, 234, 216, .46);
+            --l-muted-2: rgba(242, 234, 216, .24);
+            --l-border: rgba(242, 234, 216, .11);
+
+            --f-d: 'Bebas Neue', 'Impact', sans-serif;
+            --f-c: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+            --f-b: 'Barlow', system-ui, sans-serif;
+            --f-s: 'Libre Baskerville', Georgia, serif;
+
+            /* 8px grid spacing */
+            --s1: 4px;
+            --s2: 8px;
+            --s3: 12px;
+            --s4: 16px;
+            --s5: 20px;
+            --s6: 24px;
+            --s8: 32px;
+            --s10: 40px;
+            --s12: 48px;
+            --s14: 56px;
+            --s16: 64px;
+            --s20: 80px;
+            --s24: 96px;
+            --s32: 128px;
+
+            --max: 1300px;
+            --nav-h: 72px;
+            --px: clamp(22px, 5.5vw, 72px);
+            --sec-py: clamp(72px, 9vw, 120px);
+
+            --ease: cubic-bezier(.16, 1, .3, 1);
+            --ease-2: cubic-bezier(.4, 0, .2, 1);
+            --t1: .15s;
+            --t2: .32s;
+            --t3: .64s;
+
+            --sh-1: 0 2px 12px rgba(26, 26, 16, .10);
+            --sh-2: 0 8px 40px rgba(26, 26, 16, .14);
+            --sh-3: 0 28px 80px rgba(26, 26, 16, .18);
+        }
+
+        /* ── RESET ── */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--f-b);
+            overflow-x: hidden;
+            line-height: 1.65
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none
+        }
+
+        ul,
+        ol {
+            list-style: none
+        }
+
+        ::selection {
+            background: var(--amber-2);
+            color: var(--ink)
+        }
+
+        ::-webkit-scrollbar {
+            width: 3px
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--amber);
+            border-radius: 2px
+        }
+
+        /* ── ATMOSPHERIC OVERLAYS ── */
+        /* Grain texture — cinematic noise */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9901;
+            opacity: .055;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 180px 180px;
+            mix-blend-mode: multiply;
+        }
+
+        /* Vignette */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9900;
+            background: radial-gradient(ellipse 90% 90% at 50% 50%, transparent 55%, rgba(10, 10, 5, .28) 100%);
+        }
+
+        /* ── SCROLL PROGRESS ── */
+        #g-prog {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            z-index: 9000;
+            width: 0%;
+            background: linear-gradient(90deg, var(--amber), var(--amber-3), var(--amber));
+            transition: width .06s linear;
+            box-shadow: 0 0 10px rgba(212, 146, 10, .5);
+        }
+
+        /* ── PAGE WIPE ── */
+        #g-wipe {
+            position: fixed;
+            inset: 0;
+            background: var(--ink);
+            z-index: 9999;
+            transform: scaleY(1);
+            transform-origin: top;
+            animation: wipe-out .72s var(--ease) .08s forwards;
+            pointer-events: none;
+        }
+
+        @keyframes wipe-out {
+            to {
+                transform: scaleY(0)
+            }
+        }
+
+        /* ================================================================
+       NAVIGATION — properly balanced
+    ================================================================ */
+        #g-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 600;
+            height: var(--nav-h);
+            display: flex;
+            align-items: center;
+            padding: 0 var(--px);
+            transition: background var(--t2) var(--ease-2), border-color var(--t2), height var(--t1);
+        }
+
+        #g-nav.pinned {
+            background: rgba(242, 234, 216, .96);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border-bottom: 2px solid var(--ink);
+            height: 60px;
+            box-shadow: var(--sh-1);
+        }
+
+        /* Logo — left */
+        .nav-logo {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            border: 2px solid var(--ink);
+            padding: 6px 16px;
+            line-height: 1;
+            gap: 3px;
+            flex-shrink: 0;
+            transition: background var(--t1), color var(--t1);
+            margin-right: auto;
+        }
+
+        .nav-logo:hover {
+            background: var(--ink);
+            color: var(--cream)
+        }
+
+        .nav-logo img {
+            height: 32px;
+            width: auto;
+            display: block
+        }
+
+        .logo-n {
+            font-family: var(--f-d);
+            font-size: 15px;
+            letter-spacing: .18em;
+            white-space: nowrap;
+            display: block
+        }
+
+        .logo-s {
+            font-family: var(--f-c);
+            font-size: 7.5px;
+            font-weight: 700;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--muted);
+            display: block;
+            transition: color var(--t1)
+        }
+
+        .nav-logo:hover .logo-s {
+            color: rgba(242, 234, 216, .4)
+        }
+
+        /* Center links */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: var(--s10);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav-a {
+            font-family: var(--f-c);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--muted);
+            position: relative;
+            padding-bottom: 4px;
+            transition: color var(--t1);
+        }
+
+        .nav-a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--amber);
+            transition: width var(--t2) var(--ease);
+        }
+
+        .nav-a:hover,
+        .nav-a.on {
+            color: var(--ink)
+        }
+
+        .nav-a:hover::after,
+        .nav-a.on::after {
+            width: 100%
+        }
+
+        /* Right side */
+        .nav-r {
+            display: flex;
+            align-items: center;
+            gap: var(--s4);
+            margin-left: auto
+        }
+
+        .nav-cta {
+            font-family: var(--f-d);
+            font-size: 15px;
+            letter-spacing: .1em;
+            background: var(--amber);
+            color: var(--ink);
+            padding: 8px 22px;
+            border-radius: 2px;
+            transition: background var(--t1), transform var(--t1), box-shadow var(--t1);
+            white-space: nowrap;
+        }
+
+        .nav-cta:hover {
+            background: var(--amber-2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(212, 146, 10, .4)
+        }
+
+        .nav-menu-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            font-family: var(--f-c);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--muted);
+            transition: color var(--t1);
+        }
+
+        .nav-menu-btn:hover {
+            color: var(--ink)
+        }
+
+        .ham {
+            display: flex;
+            flex-direction: column;
+            gap: 5px
+        }
+
+        .ham span {
+            width: 22px;
+            height: 2px;
+            background: currentColor;
+            border-radius: 1px;
+            display: block;
+            transition: transform var(--t2) var(--ease), opacity var(--t1)
+        }
+
+        /* ================================================================
+       FULLSCREEN MENU
+    ================================================================ */
+        #g-menu {
+            position: fixed;
+            inset: 0;
+            z-index: 700;
+            background: var(--ink);
+            clip-path: circle(0% at calc(100% - 80px) 36px);
+            transition: clip-path .65s var(--ease);
+            pointer-events: none;
+        }
+
+        #g-menu.open {
+            clip-path: circle(160% at calc(100% - 80px) 36px);
+            pointer-events: all
+        }
+
+        .menu-inner {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            height: 100%
+        }
+
+        .menu-close {
+            position: absolute;
+            top: 22px;
+            right: var(--px);
+            z-index: 2;
+            font-family: var(--f-c);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: rgba(242, 234, 216, .3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color var(--t1);
+        }
+
+        .menu-close:hover {
+            color: var(--cream)
+        }
+
+        .menu-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: var(--s20) var(--px);
+            border-right: 1px solid var(--l-border);
+            overflow: hidden;
+        }
+
+        .menu-lnk {
+            font-family: var(--f-d);
+            font-size: clamp(52px, 8.5vw, 100px);
+            line-height: .92;
+            letter-spacing: .02em;
+            color: rgba(242, 234, 216, .08);
+            display: block;
+            transition: color var(--t1), transform var(--t2) var(--ease), letter-spacing var(--t2);
+            transform-origin: left;
+        }
+
+        .menu-lnk:hover,
+        .menu-lnk.on {
+            color: var(--cream);
+            transform: translateX(16px);
+            letter-spacing: .04em
+        }
+
+        .menu-lnk.accent {
+            color: rgba(212, 146, 10, .16)
+        }
+
+        .menu-lnk.accent:hover {
+            color: var(--amber-2)
+        }
+
+        .menu-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: var(--s20) var(--s12)
+        }
+
+        .m-lbl {
+            font-family: var(--f-c);
+            font-size: 9.5px;
+            font-weight: 700;
+            letter-spacing: .26em;
+            text-transform: uppercase;
+            color: rgba(242, 234, 216, .22);
+            margin-bottom: var(--s4)
+        }
+
+        .m-lnk {
+            font-family: var(--f-s);
+            font-style: italic;
+            font-size: 14px;
+            color: rgba(242, 234, 216, .38);
+            display: block;
+            margin-bottom: var(--s2);
+            transition: color var(--t1)
+        }
+
+        .m-lnk:hover {
+            color: var(--amber-2)
+        }
+
+        .m-div {
+            height: 1px;
+            background: var(--l-border);
+            margin: var(--s6) 0
+        }
+
+        .m-tag {
+            font-family: var(--f-s);
+            font-style: italic;
+            font-size: 13px;
+            color: rgba(242, 234, 216, .18);
+            line-height: 1.9
+        }
+
+        /* ================================================================
+       FOOTER — cinematic premium
+    ================================================================ */
+        #g-foot {
+            background: var(--ink-2);
+            color: var(--cream);
+            position: relative;
+            overflow: hidden;
+            border-top: 3px solid var(--amber);
+        }
+
+        #g-foot::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -80px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 146, 10, .06) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .foot-top {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: var(--s20) var(--px) 0;
+        }
+
+        .foot-banner {
+            font-family: var(--f-d);
+            font-size: clamp(56px, 10vw, 140px);
+            line-height: .82;
+            letter-spacing: .03em;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(242, 234, 216, .09);
+            user-select: none;
+            pointer-events: none;
+            margin-bottom: var(--s12);
+            white-space: nowrap;
+        }
+
+        .foot-divider {
+            height: 1px;
+            background: var(--l-border);
+            margin: 0 var(--px)
+        }
+
+        .foot-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: var(--s12) var(--px) var(--s16)
+        }
+
+        .foot-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr;
+            gap: var(--s16);
+            padding-bottom: var(--s12);
+            border-bottom: 1px solid var(--l-border);
+            margin-bottom: var(--s8);
+        }
+
+        .foot-brand-name {
+            font-family: var(--f-d);
+            font-size: clamp(32px, 5vw, 54px);
+            letter-spacing: .04em;
+            line-height: .88;
+            color: var(--cream);
+            margin-bottom: var(--s3);
+        }
+
+        .foot-brand-sub {
+            font-family: var(--f-c);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: rgba(242, 234, 216, .22);
+            margin-bottom: var(--s6);
+        }
+
+        .foot-tag {
+            font-family: var(--f-s);
+            font-style: italic;
+            font-size: 14px;
+            color: rgba(242, 234, 216, .28);
+            line-height: 1.9;
+            max-width: 240px;
+            margin-bottom: var(--s8);
+        }
+
+        .foot-social {
+            display: flex;
+            gap: var(--s3);
+            flex-wrap: wrap
+        }
+
+        .foot-soc-a {
+            font-family: var(--f-c);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            border: 1.5px solid rgba(242, 234, 216, .14);
+            padding: 8px 16px;
+            border-radius: 100px;
+            color: rgba(242, 234, 216, .35);
+            transition: border-color var(--t1), color var(--t1);
+        }
+
+        .foot-soc-a:hover {
+            border-color: var(--amber);
+            color: var(--amber)
+        }
+
+        .foot-col-h {
+            font-family: var(--f-c);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            color: rgba(242, 234, 216, .26);
+            margin-bottom: var(--s6);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .foot-col-h::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: var(--amber);
+            flex-shrink: 0
+        }
+
+        .foot-a {
+            display: block;
+            font-size: 15px;
+            font-weight: 400;
+            color: rgba(242, 234, 216, .42);
+            margin-bottom: var(--s3);
+            transition: color var(--t1), padding-left var(--t2);
+        }
+
+        .foot-a:hover {
+            color: var(--amber-2);
+            padding-left: 8px
+        }
+
+        .foot-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: var(--s4);
+        }
+
+        .foot-contact-icon {
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(242, 234, 216, .1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            font-size: 11px;
+            color: var(--amber);
+        }
+
+        .foot-contact-label {
+            font-size: 9px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(242, 234, 216, .26);
+            margin-bottom: 2px
+        }
+
+        .foot-contact-val {
+            font-size: 14px;
+            color: rgba(242, 234, 216, .52);
+            line-height: 1.4
+        }
+
+        .foot-bot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--s4);
+        }
+
+        .foot-copy {
+            font-family: var(--f-c);
+            font-size: 10.5px;
+            letter-spacing: .06em;
+            color: rgba(242, 234, 216, .18)
+        }
+
+        .foot-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(212, 146, 10, .08);
+            border: 1px solid rgba(212, 146, 10, .18);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-family: var(--f-c);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(212, 146, 10, .6);
+        }
+
+        /* ================================================================
+       GLOBAL SCROLL REVEAL
+    ================================================================ */
+        .rv {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity var(--t3) var(--ease), transform var(--t3) var(--ease)
+        }
+
+        .rv.sl {
+            transform: translateX(-36px)
+        }
+
+        .rv.sr {
+            transform: translateX(36px)
+        }
+
+        .rv.ss {
+            transform: scale(.92)
+        }
+
+        .rv.in {
+            opacity: 1;
+            transform: none
+        }
+
+        .d1 {
+            transition-delay: .06s !important
+        }
+
+        .d2 {
+            transition-delay: .14s !important
+        }
+
+        .d3 {
+            transition-delay: .20s !important
+        }
+
+        .d4 {
+            transition-delay: .28s !important
+        }
+
+        .d5 {
+            transition-delay: .36s !important
+        }
+
+        .d6 {
+            transition-delay: .44s !important
+        }
+
+        .d7 {
+            transition-delay: .52s !important
+        }
+
+        .d8 {
+            transition-delay: .60s !important
+        }
+
+        /* ================================================================
+       GLOBAL UTILITIES
+    ================================================================ */
+        .wrap {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 0 var(--px)
+        }
+
+        .sec {
+            padding: var(--sec-py) var(--px)
+        }
+
+        /* Section label */
+        .s-lbl {
+            font-family: var(--f-c);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .s-lbl::before {
+            content: '';
+            width: 28px;
+            height: 2px;
+            background: currentColor;
+            flex-shrink: 0
+        }
+
+        /* Marquee */
+        @keyframes mq-l {
+            from {
+                transform: translateX(0)
+            }
+
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        @keyframes mq-r {
+            from {
+                transform: translateX(-50%)
+            }
+
+            to {
+                transform: translateX(0)
+            }
+        }
+
+        .mq-wrap {
+            overflow: hidden;
+            position: relative
+        }
+
+        .mq-track {
+            display: flex;
+            width: max-content;
+            will-change: transform
+        }
+
+        .mq-l {
+            animation: mq-l var(--d, 36s) linear infinite
+        }
+
+        .mq-r {
+            animation: mq-r var(--d, 36s) linear infinite
+        }
+
+        .mq-track:hover {
+            animation-play-state: paused
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--f-d);
+            letter-spacing: .09em;
+            font-size: 17px;
+            padding: 12px 28px;
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: transform var(--t1) var(--ease), box-shadow var(--t1) var(--ease), background var(--t1), color var(--t1), border-color var(--t1);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, .12);
+            transform: translateX(-110%) skewX(-14deg);
+            transition: transform .45s var(--ease);
+        }
+
+        .btn:hover::before {
+            transform: translateX(120%) skewX(-14deg)
+        }
+
+        .btn:hover {
+            transform: translateY(-2px)
+        }
+
+        .btn-ink {
+            background: var(--ink);
+            color: var(--cream)
+        }
+
+        .btn-ink:hover {
+            box-shadow: 0 10px 28px rgba(26, 26, 16, .28)
+        }
+
+        .btn-amber {
+            background: var(--amber);
+            color: var(--ink)
+        }
+
+        .btn-amber:hover {
+            background: var(--amber-2);
+            box-shadow: 0 10px 28px rgba(212, 146, 10, .42)
+        }
+
+        .btn-ol-dk {
+            border: 2px solid var(--ink);
+            color: var(--ink);
+            background: transparent;
+            padding: 10px 26px
+        }
+
+        .btn-ol-dk:hover {
+            background: var(--ink);
+            color: var(--cream)
+        }
+
+        .btn-ol-lt {
+            border: 2px solid rgba(242, 234, 216, .34);
+            color: var(--cream);
+            background: transparent;
+            padding: 10px 26px
+        }
+
+        .btn-ol-lt:hover {
+            background: var(--cream);
+            color: var(--ink);
+            border-color: var(--cream)
+        }
+
+        .btn-lg {
+            font-size: 19px;
+            padding: 14px 34px
+        }
+
+        /* Shared keyframes */
+        @keyframes float-a {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-12px)
+            }
+        }
+
+        @keyframes float-b {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(10px)
+            }
+        }
+
+        @keyframes spin-cw {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        @keyframes float-x {
+
+            0%,
+            100% {
+                transform: translateX(0)
+            }
+
+            50% {
+                transform: translateX(8px)
+            }
+        }
+
+        /* ================================================================
+       RESPONSIVE
+    ================================================================ */
+        @media(max-width:1080px) {
+            .nav-links {
+                display: none
+            }
+        }
+
+        @media(max-width:768px) {
+            :root {
+                --nav-h: 62px;
+                --sec-py: clamp(56px, 9vw, 84px)
+            }
+
+            .nav-cta {
+                display: none
+            }
+
+            .menu-inner {
+                grid-template-columns: 1fr
+            }
+
+            .menu-right {
+                display: none
+            }
+
+            .menu-left {
+                padding: 72px var(--px)
+            }
+
+            .foot-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            #g-foot::before {
+                display: none
+            }
+        }
+
+        @media(max-width:480px) {
+            :root {
+                --px: 18px
+            }
+
+            .foot-grid {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="g-wipe" aria-hidden="true"></div>
+    <div id="g-prog" aria-hidden="true"></div>
+
+    <!-- NAV -->
+    <nav id="g-nav" role="navigation" aria-label="Main navigation">
+        <a href="https://filmycurry.com/" class="nav-logo" aria-label="FilmyCurry">
+                            <span class="logo-n">Filmy Curry</span>
+                <span class="logo-s">Cinema Studio</span>
+                    </a>
+        <div class="nav-links">
+            <a href="https://filmycurry.com/" class="nav-a on">Home</a>
+            <a href="https://filmycurry.com/about" class="nav-a ">About</a>
+            <a href="https://filmycurry.com/work" class="nav-a ">Work</a>
+            <a href="https://filmycurry.com/contact"
+                class="nav-a ">Contact</a>
+        </div>
+        <div class="nav-r">
+            <a href="https://filmycurry.com/contact" class="nav-cta">Let's Talk</a>
+            <button class="nav-menu-btn" id="g-mbtn" onclick="gMenu()" aria-expanded="false" aria-controls="g-menu">
+                <span>MENU</span>
+                <span class="ham" aria-hidden="true"><span id="hl1"></span><span id="hl2"></span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- FULLSCREEN MENU -->
+    <div id="g-menu" role="dialog" aria-modal="true" aria-label="Navigation">
+        <button class="menu-close" onclick="gMenu()" aria-label="Close menu">CLOSE &#215;</button>
+        <div class="menu-inner">
+            <div class="menu-left">
+                <a href="https://filmycurry.com/" class="menu-lnk on">HOME</a>
+                <a href="https://filmycurry.com/about"
+                    class="menu-lnk ">ABOUT</a>
+                <a href="https://filmycurry.com/work" class="menu-lnk ">OUR
+                    WORK</a>
+                <a href="https://filmycurry.com/contact" class="menu-lnk accent">CONTACT</a>
+            </div>
+            <div class="menu-right">
+                <p class="m-lbl">Get In Touch</p>
+                <a href="mailto:contact@filmycurry.com"
+                    class="m-lnk">contact@filmycurry.com</a>
+                <a href="tel:+91 9990802115"
+                    class="m-lnk">+91 9990802115</a>
+                <div class="m-div"></div>
+                <p class="m-lbl">Follow Us</p>
+                <a href="#" class="m-lnk" data-no-wipe>Instagram</a>
+                <a href="#" class="m-lnk" data-no-wipe>LinkedIn</a>
+                <a href="#" class="m-lnk" data-no-wipe>Twitter / X</a>
+                <div class="m-div"></div>
+                <p class="m-tag">Where Cinema Meets Culture &mdash; India&#8217;s trusted studio for influencer &amp;
+                    film marketing.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN -->
+    <main id="mc" role="main">
+<style>
+    /* ================================================================
+   HOME PAGE — CINEMATIC PREMIUM
+================================================================ */
+
+    /* ── HERO ── */
+    .hero {
+        background: var(--olive-dk);
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* dot grid */
+    .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(242, 234, 216, .06) 1px, transparent 1px);
+        background-size: 30px 30px;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    /* ambient glows */
+    .h-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .hg1 {
+        width: 500px;
+        height: 500px;
+        background: rgba(212, 146, 10, .10);
+        top: -140px;
+        right: -100px;
+        animation: float-a 24s ease-in-out infinite;
+    }
+
+    .hg2 {
+        width: 360px;
+        height: 360px;
+        background: rgba(107, 122, 85, .22);
+        bottom: 10%;
+        left: -80px;
+        animation: float-b 30s ease-in-out 6s infinite;
+    }
+
+    .hg3 {
+        width: 240px;
+        height: 240px;
+        background: rgba(212, 146, 10, .07);
+        top: 45%;
+        left: 38%;
+        animation: float-a 18s ease-in-out 3s infinite;
+    }
+
+    .hg4 {
+        width: 180px;
+        height: 180px;
+        background: rgba(93, 120, 60, .15);
+        top: 20%;
+        right: 30%;
+        animation: float-b 20s ease-in-out 9s infinite;
+    }
+
+    /* hero body center */
+    .hero-body {
+        flex: 1;
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: calc(var(--nav-h) + 56px) var(--px) 48px;
+    }
+
+    .hero-eye {
+        font-family: var(--f-c);
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: .34em;
+        text-transform: uppercase;
+        color: rgba(242, 234, 216, .5);
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: var(--s8);
+        opacity: 0;
+        animation: fadeUp .8s var(--ease) .2s forwards;
+    }
+
+    .hero-eye::before,
+    .hero-eye::after {
+        content: '';
+        width: 32px;
+        height: 1.5px;
+        background: var(--amber);
+        display: block;
+    }
+
+    .hero-h1 {
+        font-family: var(--f-d);
+        font-size: clamp(80px, 17vw, 228px);
+        line-height: .78;
+        letter-spacing: .02em;
+        color: var(--cream);
+        position: relative;
+        z-index: 1;
+        opacity: 0;
+        animation: fadeUp 1.1s var(--ease) .35s forwards;
+    }
+
+    .hero-h1 .line-outline {
+        display: block;
+        color: transparent;
+        -webkit-text-stroke: 2.5px rgba(242, 234, 216, .4);
+    }
+
+    .hero-h1 .line-gold {
+        display: block;
+        color: var(--amber);
+        margin-top: -.02em;
+    }
+
+    .hero-h1 .line-solid {
+        display: block;
+    }
+
+    .hero-sub {
+        font-family: var(--f-s);
+        font-style: italic;
+        font-size: clamp(15px, 1.8vw, 18px);
+        letter-spacing: .04em;
+        color: rgba(242, 234, 216, .52);
+        max-width: 500px;
+        line-height: 1.8;
+        margin: var(--s8) auto 0;
+        opacity: 0;
+        animation: fadeUp .8s var(--ease) .8s forwards;
+    }
+
+    .hero-btns {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: var(--s12);
+        opacity: 0;
+        animation: fadeUp .7s var(--ease) 1s forwards;
+    }
+
+    /* ── FLOATING LEFT PANEL ── */
+    .hero-float-l {
+        position: absolute;
+        left: clamp(18px, 3.5vw, 56px);
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        gap: var(--s4);
+        align-items: flex-start;
+        opacity: 0;
+        animation: fadeUp .9s var(--ease) 1.1s forwards;
+    }
+
+    /* OTT orbit badge */
+    .spin-badge {
+        position: relative;
+        width: 116px;
+        height: 116px;
+        flex-shrink: 0;
+        animation: float-a 7s ease-in-out 1s infinite;
+    }
+
+    .spin-badge-ring {
+        width: 100%;
+        height: 100%;
+        border: 1.5px solid rgba(242, 234, 216, .2);
+        border-radius: 50%;
+        position: relative;
+        animation: spin-cw 24s linear infinite;
+    }
+
+    .spin-badge-inner {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        animation: spin-cw 24s linear infinite reverse;
+    }
+
+    .spin-badge-n {
+        font-family: var(--f-d);
+        font-size: 28px;
+        line-height: 1;
+        color: var(--amber);
+        display: block;
+    }
+
+    .spin-badge-l {
+        font-family: var(--f-c);
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: rgba(242, 234, 216, .4);
+        margin-top: 3px;
+        display: block;
+    }
+
+    /* Vertical scroll label */
+    .hero-scroll-cue {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--s3);
+        margin-top: var(--s8);
+    }
+
+    .hero-scroll-line {
+        width: 1px;
+        height: 52px;
+        background: linear-gradient(var(--amber), transparent);
+        animation: float-a 3s ease-in-out infinite;
+    }
+
+    .hero-scroll-t {
+        font-family: var(--f-c);
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: .26em;
+        text-transform: uppercase;
+        color: rgba(242, 234, 216, .22);
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+    }
+
+    /* Small achievement chip */
+    .hero-chip {
+        background: rgba(26, 26, 10, .7);
+        border: 1px solid rgba(242, 234, 216, .10);
+        backdrop-filter: blur(16px);
+        padding: 10px 14px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 148px;
+        animation: float-b 9s ease-in-out 2s infinite;
+        margin-top: var(--s4);
+    }
+
+    .hero-chip-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--amber);
+        flex-shrink: 0;
+        animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+
+        0%,
+        100% {
+            box-shadow: 0 0 0 0 rgba(212, 146, 10, .5)
+        }
+
+        50% {
+            box-shadow: 0 0 0 6px rgba(212, 146, 10, 0)
+        }
+    }
+
+    .hero-chip-txt {
+        font-family: var(--f-c);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: rgba(242, 234, 216, .5);
+    }
+
+    .hero-chip-val {
+        font-family: var(--f-d);
+        font-size: 20px;
+        color: var(--cream);
+        line-height: 1;
+    }
+
+    /* ── FLOATING RIGHT PANEL ── */
+    .hero-float-r {
+        position: absolute;
+        right: clamp(18px, 3.5vw, 56px);
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        min-width: 156px;
+        opacity: 0;
+        animation: fadeUp .9s var(--ease) 1.2s forwards;
+    }
+
+    .hfc {
+        background: rgba(26, 26, 10, .78);
+        border: 1px solid rgba(242, 234, 216, .09);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        padding: 16px 20px;
+        transition: border-color var(--t2), transform var(--t2);
+    }
+
+    .hfc:nth-child(1) {
+        animation: float-b 8s ease-in-out 1s infinite;
+    }
+
+    .hfc:nth-child(3) {
+        animation: float-a 7s ease-in-out 2s infinite;
+    }
+
+    .hfc:nth-child(5) {
+        animation: float-b 9s ease-in-out 1.5s infinite;
+    }
+
+    .hfc:hover {
+        border-color: rgba(212, 146, 10, .3);
+        transform: translateX(-5px);
+    }
+
+    .hfc-n {
+        font-family: var(--f-d);
+        font-size: 30px;
+        line-height: 1;
+        letter-spacing: .02em;
+    }
+
+    .hfc-l {
+        font-family: var(--f-c);
+        font-size: 8.5px;
+        font-weight: 700;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        color: var(--l-muted);
+        margin-top: 4px;
+    }
+
+    .hfc-div {
+        height: 2px;
+        background: rgba(242, 234, 216, .07);
+    }
+
+    /* Vertical decorative text right side */
+    .hero-vert-r {
+        position: absolute;
+        bottom: 100px;
+        right: clamp(18px, 3.5vw, 56px);
+        z-index: 3;
+        font-family: var(--f-c);
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: .3em;
+        text-transform: uppercase;
+        color: rgba(242, 234, 216, .16);
+        writing-mode: vertical-rl;
+        opacity: 0;
+        animation: fadeUp .6s var(--ease) 1.6s forwards;
+    }
+
+    /* hero bottom stats bar */
+    .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-top: 2px solid rgba(242, 234, 216, .1);
+        position: relative;
+        z-index: 2;
+        opacity: 0;
+        animation: fadeUp .7s var(--ease) 1.5s forwards;
+    }
+
+    .hs-cell {
+        padding: 24px 28px;
+        border-right: 1px solid rgba(242, 234, 216, .08);
+        transition: background var(--t2);
+        cursor: default;
+    }
+
+    .hs-cell:last-child {
+        border-right: none;
+    }
+
+    .hs-cell:hover {
+        background: rgba(242, 234, 216, .05);
+    }
+
+    .hs-n {
+        font-family: var(--f-d);
+        font-size: clamp(28px, 4vw, 46px);
+        line-height: 1;
+        letter-spacing: .02em;
+        color: var(--cream);
+    }
+
+    .hs-l {
+        font-family: var(--f-c);
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: rgba(242, 234, 216, .32);
+        margin-top: 6px;
+    }
+
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(28px)
+        }
+
+        to {
+            opacity: 1;
+            transform: none
+        }
+    }
+
+    /* ── TICKER ── */
+    .ticker {
+        background: var(--ink);
+        border-top: 3px solid var(--amber);
+        border-bottom: 3px solid var(--amber);
+        padding: 16px 0;
+        overflow: hidden;
+    }
+
+    .tk-w {
+        font-family: var(--f-d);
+        font-size: clamp(22px, 3.5vw, 40px);
+        letter-spacing: .04em;
+        color: rgba(242, 234, 216, .09);
+        padding: 0 36px;
+        white-space: nowrap;
+        display: inline-block;
+    }
+
+    .tk-sep {
+        color: var(--amber);
+        font-size: 16px;
+        opacity: .6;
+        display: inline-block;
+        padding: 0 2px;
+    }
+
+    /* ── BRANDS ── */
+    .brands {
+        background: var(--cream-2);
+        border-bottom: 1.5px solid var(--border);
+        padding: 24px 0;
+    }
+
+    .brand-chip {
+        font-family: var(--f-c);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: rgba(26, 26, 16, .28);
+        padding: 6px 20px;
+        margin: 0 3px;
+        border: 1.5px solid rgba(26, 26, 16, .10);
+        border-radius: 100px;
+        white-space: nowrap;
+        display: inline-block;
+        transition: border-color var(--t2), color var(--t2);
+        cursor: default;
+    }
+
+    .brand-chip:hover {
+        border-color: rgba(26, 26, 16, .28);
+        color: rgba(26, 26, 16, .56);
+    }
+
+    /* ── ABOUT ── */
+    .about {
+        background: var(--cream);
+    }
+
+    .about-wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: var(--sec-py) var(--px);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+    }
+
+    .about-h {
+        font-family: var(--f-d);
+        font-size: clamp(48px, 7.5vw, 104px);
+        line-height: .86;
+        letter-spacing: .02em;
+        color: var(--ink);
+        margin-bottom: var(--s8);
+    }
+
+    .about-h .ul {
+        text-decoration: underline;
+        text-decoration-thickness: 4px;
+        text-underline-offset: 8px;
+        text-decoration-color: var(--amber);
+    }
+
+    .about-body {
+        font-family: var(--f-s);
+        font-style: italic;
+        font-size: clamp(15px, 1.6vw, 17px);
+        color: var(--muted);
+        line-height: 1.92;
+        max-width: 440px;
+        margin-bottom: var(--s10);
+    }
+
+    .about-cta {
+        font-family: var(--f-c);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        border-bottom: 2px solid var(--amber);
+        padding-bottom: 3px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: color var(--t1);
+    }
+
+    .about-cta:hover {
+        color: var(--amber);
+    }
+
+    .about-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2px;
+        margin-top: var(--s14);
+        border: 2.5px solid var(--ink);
+        overflow: hidden;
+    }
+
+    .as-c {
+        background: var(--ink);
+        color: var(--cream);
+        padding: 24px 20px;
+        transition: background var(--t2);
+        cursor: default;
+    }
+
+    .as-c:hover {
+        background: var(--olive-dk);
+    }
+
+    .as-n {
+        font-family: var(--f-d);
+        font-size: clamp(30px, 4vw, 46px);
+        line-height: 1;
+        letter-spacing: .02em;
+    }
+
+    .as-l {
+        font-family: var(--f-c);
+        font-size: 8.5px;
+        font-weight: 700;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: rgba(242, 234, 216, .3);
+        margin-top: 5px;
+    }
+
+    /* visual box */
+    .av {
+        position: relative;
+        height: 520px;
+    }
+
+    .av-main {
+        position: absolute;
+        inset: 0;
+        background: var(--ink);
+        border: 2.5px solid var(--ink);
+        overflow: hidden;
+    }
+
+    .av-main::before,
+    .av-main::after {
+        content: '';
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-color: var(--amber);
+        border-style: solid;
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    .av-main::before {
+        top: 18px;
+        left: 18px;
+        border-width: 2px 0 0 2px;
+    }
+
+    .av-main::after {
+        bottom: 18px;
+        right: 18px;
+        border-width: 0 2px 2px 0;
+    }
+
+    .av-yr {
+        font-family: var(--f-d);
+        font-size: clamp(80px, 14vw, 154px);
+        line-height: 1;
+        letter-spacing: -.04em;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(242, 234, 216, .096);
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .av-facts {
+        padding: var(--s10) var(--s8);
+        position: relative;
+        z-index: 1;
+    }
+
+    .av-fact {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(242, 234, 216, .05);
+        transition: padding-left var(--t2);
+    }
+
+    .av-fact:last-child {
+        border-bottom: none;
+    }
+
+    .av-fact:hover {
+        padding-left: 10px;
+    }
+
+    .av-fact svg {
+        opacity: .4;
+        transition: opacity var(--t2), transform var(--t2);
+        flex-shrink: 0;
+    }
+
+    .av-fact:hover svg {
+        opacity: .9;
+        transform: scale(1.2);
+    }
+
+    .av-ft {
+        font-family: var(--f-c);
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: .06em;
+        color: rgba(242, 234, 216, .52);
+    }
+
+    .av-badge {
+        position: absolute;
+        top: -24px;
+        right: 64px;
+        background: var(--amber);
+        color: var(--ink);
+        padding: 16px 20px;
+        z-index: 3;
+        animation: float-a 5.5s ease-in-out infinite;
+    }
+
+    .av-badge-n {
+        font-family: var(--f-d);
+        font-size: 38px;
+        line-height: 1;
+        letter-spacing: .02em;
+    }
+
+    .av-badge-l {
+        font-family: var(--f-c);
+        font-size: 8.5px;
+        font-weight: 700;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        color: rgba(26, 26, 16, .6);
+        margin-top: 4px;
+    }
+
+    /* ── FEATURES ── */
+    .features {
+        background: var(--cream-2);
+    }
+
+    .feat-wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: var(--sec-py) var(--px);
+    }
+
+    .feat-top {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--s14);
+        align-items: end;
+        margin-bottom: var(--s14);
+    }
+
+    .feat-sub {
+        font-family: var(--f-b);
+        font-size: 15px;
+        letter-spacing: .02em;
+        color: var(--muted);
+        line-height: 1.78;
+        max-width: 320px;
+        padding-bottom: 6px;
+    }
+
+    .feat-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3px;
+        border: 2.5px solid var(--ink);
+        overflow: hidden;
+    }
+
+    .fc {
+        background: var(--ink-2);
+        padding: var(--s12) var(--s8) var(--s10);
+        transition: background var(--t2);
+        cursor: default;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .fc::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2.5px;
+        background: var(--amber);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .4s var(--ease);
+    }
+
+    .fc:hover::before {
+        transform: scaleX(1);
+    }
+
+    .fc:hover {
+        background: var(--ink-3);
+    }
+
+    .fc-ico {
+        width: 42px;
+        height: 42px;
+        border: 1.5px solid rgba(242, 234, 216, .11);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--s6);
+        transition: border-color var(--t2), background var(--t2);
+    }
+
+    .fc:hover .fc-ico {
+        border-color: rgba(212, 146, 10, .3);
+        background: rgba(212, 146, 10, .06);
+    }
+
+    .fc-ico svg {
+        stroke: rgba(242, 234, 216, .42);
+        transition: stroke var(--t2), transform var(--t2);
+    }
+
+    .fc:hover .fc-ico svg {
+        stroke: var(--amber-2);
+        transform: scale(1.12);
+    }
+
+    .fc-t {
+        font-family: var(--f-d);
+        font-size: clamp(20px, 2.2vw, 28px);
+        letter-spacing: .04em;
+        color: var(--cream);
+        margin-bottom: 10px;
+        transition: color var(--t2);
+    }
+
+    .fc:hover .fc-t {
+        color: var(--amber);
+    }
+
+    .fc-d {
+        font-size: 13.5px;
+        color: rgba(242, 234, 216, .36);
+        line-height: 1.72;
+        font-weight: 300;
+    }
+
+    /* ── SERVICES ── */
+    .services {
+        background: var(--ink);
+    }
+
+    .svc-wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+    }
+
+    .svc-hdr {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: var(--sec-py) var(--px) var(--s14);
+        border-bottom: 1px solid var(--l-border);
+        flex-wrap: wrap;
+        gap: var(--s6);
+    }
+
+    .svc-h {
+        font-family: var(--f-d);
+        font-size: clamp(48px, 7.5vw, 104px);
+        line-height: .86;
+        letter-spacing: .02em;
+        color: var(--cream);
+    }
+
+    .svc-h span {
+        color: var(--amber);
+    }
+
+    .svc-list {
+        padding: 0 var(--px) var(--sec-py);
+    }
+
+    .svc-row {
+        display: grid;
+        grid-template-columns: 64px 1fr auto auto;
+        align-items: center;
+        gap: var(--s8);
+        padding: 20px 0;
+        border-top: 1px solid var(--l-border);
+        transition: padding-left var(--t2);
+        cursor: default;
+    }
+
+    .svc-row:last-child {
+        border-bottom: 1px solid var(--l-border);
+    }
+
+    .svc-row:hover {
+        padding-left: 16px;
+    }
+
+    .svc-row:hover .svc-num,
+    .svc-row:hover .svc-t {
+        color: var(--amber);
+    }
+
+    .svc-row:hover .svc-arr {
+        border-color: rgba(212, 146, 10, .4);
+        transform: rotate(-45deg) translate(2px, -2px);
+    }
+
+    .svc-row:hover .svc-arr svg {
+        stroke: var(--amber);
+    }
+
+    .svc-num {
+        font-family: var(--f-d);
+        font-size: 14px;
+        letter-spacing: .1em;
+        color: rgba(242, 234, 216, .14);
+        transition: color var(--t2);
+    }
+
+    .svc-body {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .svc-t {
+        font-family: var(--f-d);
+        font-size: clamp(20px, 2.6vw, 34px);
+        letter-spacing: .03em;
+        color: var(--cream);
+        transition: color var(--t2);
+    }
+
+    .svc-d {
+        font-size: 13.5px;
+        color: rgba(242, 234, 216, .3);
+        line-height: 1.65;
+        font-weight: 300;
+        max-width: 420px;
+    }
+
+    .svc-ico {
+        width: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: .3;
+        transition: opacity var(--t2), transform var(--t2);
+    }
+
+    .svc-row:hover .svc-ico {
+        opacity: .85;
+        transform: scale(1.18) rotate(-5deg);
+    }
+
+    .svc-arr {
+        width: 36px;
+        height: 36px;
+        border: 1.5px solid rgba(242, 234, 216, .1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: border-color var(--t2), transform var(--t2);
+    }
+
+    .svc-arr svg {
+        stroke: rgba(242, 234, 216, .18);
+        transition: stroke var(--t2);
+    }
+
+    /* ── CAMPAIGNS ── */
+    .campaigns {
+        background: var(--cream);
+    }
+
+    .camp-wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: var(--sec-py) var(--px);
+    }
+
+    .camp-hdr {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: var(--s14);
+        flex-wrap: wrap;
+        gap: var(--s8);
+    }
+
+    .camp-h {
+        font-family: var(--f-d);
+        font-size: clamp(48px, 7.5vw, 104px);
+        line-height: .86;
+        letter-spacing: .02em;
+        color: var(--ink);
+    }
+
+    .camp-h span {
+        color: var(--olive);
+    }
+
+    .camp-see {
+        font-family: var(--f-c);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        border-bottom: 2px solid var(--ink);
+        padding-bottom: 2px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: color var(--t1), border-color var(--t1);
+        align-self: flex-end;
+        margin-bottom: 4px;
+    }
+
+    .camp-see:hover {
+        color: var(--amber);
+        border-color: var(--amber);
+    }
+
+    .camp-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 3px;
+        border: 2.5px solid var(--ink);
+        overflow: hidden;
+    }
+
+    .ccard {
+        position: relative;
+        background: var(--ink-2);
+        overflow: hidden;
+        display: block;
+        transition: background var(--t2);
+    }
+
+    .ccard:hover {
+        background: var(--ink-3);
+    }
+
+    .ccard.feat {
+        grid-column: span 8;
+    }
+
+    .ccard.sm {
+        grid-column: span 4;
+    }
+
+    .c-img {
+        overflow: hidden;
+        position: relative;
+    }
+
+    .c-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(.46) saturate(.68);
+        transition: transform .9s var(--ease), filter .9s;
+    }
+
+    .ccard:hover .c-img img {
+        transform: scale(1.08);
+        filter: brightness(.68) saturate(1);
+    }
+
+    .c-img::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(26, 26, 16, .98) 0%, transparent 55%);
+    }
+
+    .ccard.feat .c-img {
+        height: 360px;
+    }
+
+    .ccard.sm .c-img {
+        height: 210px;
+    }
+
+    .c-ph {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--ink);
+    }
+
+    .c-ph span {
+        font-family: var(--f-d);
+        font-size: 48px;
+        color: rgba(242, 234, 216, .04);
+    }
+
+    .c-body {
+        padding: 22px;
+    }
+
+    .ccard.feat .c-body {
+        padding: 28px;
+    }
+
+    .c-auth {
+        font-family: var(--f-c);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: .24em;
+        text-transform: uppercase;
+        color: var(--amber);
+        opacity: .72;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .c-t {
+        font-family: var(--f-d);
+        font-size: clamp(18px, 2vw, 28px);
+        letter-spacing: .02em;
+        color: var(--cream);
+        line-height: 1.1;
+        margin-bottom: 7px;
+        transition: color var(--t2);
+    }
+
+    .ccard.feat .c-t {
+        font-size: clamp(24px, 2.8vw, 38px);
+    }
+
+    .ccard:hover .c-t {
+        color: var(--amber-2);
+    }
+
+    .c-d {
+        font-size: 13px;
+        color: rgba(242, 234, 216, .34);
+        line-height: 1.65;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .c-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 14px;
+        font-family: var(--f-c);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: rgba(242, 234, 216, .2);
+        transition: color var(--t2), gap var(--t2);
+    }
+
+    .ccard:hover .c-cta {
+        color: var(--amber-2);
+        gap: 12px;
+    }
+
+    .camp-empty {
+        grid-column: span 12;
+        padding: 72px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        background: var(--ink-2);
+    }
+
+    .camp-empty-h {
+        font-family: var(--f-d);
+        font-size: 38px;
+        color: rgba(242, 234, 216, .15);
+    }
+
+    /* ── STATS ── */
+    .stats-sec {
+        background: var(--olive);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stats-sec::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(212, 146, 10, .08) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .stats-inner {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: var(--sec-py) var(--px);
+    }
+
+    .stats-top {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--s14);
+        align-items: end;
+        margin-bottom: var(--s14);
+    }
+
+    .stats-h {
+        font-family: var(--f-d);
+        font-size: clamp(42px, 6.5vw, 88px);
+        line-height: .88;
+        letter-spacing: .02em;
+        color: var(--cream);
+    }
+
+    .stats-h span {
+        color: var(--amber);
+    }
+
+    .stats-sub {
+        font-family: var(--f-s);
+        font-style: italic;
+        font-size: 16px;
+        letter-spacing: .02em;
+        color: rgba(242, 234, 216, .4);
+        line-height: 1.8;
+        max-width: 320px;
+        padding-bottom: 6px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2px;
+        background: rgba(242, 234, 216, .1);
+        border: 1.5px solid rgba(242, 234, 216, .12);
+        overflow: hidden;
+    }
+
+    .stat-cell {
+        background: rgba(242, 234, 216, .04);
+        padding: 32px 24px;
+        border-right: 1px solid rgba(242, 234, 216, .08);
+        transition: background var(--t2);
+        cursor: default;
+    }
+
+    .stat-cell:last-child {
+        border-right: none;
+    }
+
+    .stat-cell:hover {
+        background: rgba(242, 234, 216, .10);
+    }
+
+    .stat-n {
+        font-family: var(--f-d);
+        font-size: clamp(40px, 6vw, 70px);
+        line-height: 1;
+        letter-spacing: .02em;
+        color: var(--amber);
+    }
+
+    .stat-l {
+        font-family: var(--f-c);
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: .24em;
+        text-transform: uppercase;
+        color: rgba(242, 234, 216, .36);
+        margin-top: 7px;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testi {
+        background: var(--cream-2);
+    }
+
+    .testi-wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: var(--sec-py) var(--px);
+    }
+
+    .testi-hdr {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: var(--s14);
+        flex-wrap: wrap;
+        gap: var(--s6);
+    }
+
+    .testi-h {
+        font-family: var(--f-d);
+        font-size: clamp(42px, 6.5vw, 88px);
+        line-height: .88;
+        letter-spacing: .02em;
+        color: var(--ink);
+    }
+
+    .testi-h em {
+        font-family: var(--f-s);
+        font-style: italic;
+        color: var(--amber);
+    }
+
+    .testi-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3px;
+        border: 2.5px solid var(--ink);
+        overflow: hidden;
+    }
+
+    .tcard {
+        background: var(--ink-2);
+        padding: var(--s12) var(--s8);
+        position: relative;
+        overflow: hidden;
+        transition: background var(--t2);
+    }
+
+    .tcard::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2.5px;
+        background: var(--amber);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .4s var(--ease);
+    }
+
+    .tcard:hover {
+        background: var(--ink-3);
+    }
+
+    .tcard:hover::before {
+        transform: scaleX(1);
+    }
+
+    .tcard-qi {
+        width: 28px;
+        height: 28px;
+        margin-bottom: var(--s6);
+        opacity: .28;
+    }
+
+    .tcard-qi svg {
+        stroke: var(--amber-2);
+    }
+
+    .tcard-stars {
+        display: flex;
+        gap: 4px;
+        margin-bottom: var(--s4);
+    }
+
+    .tcard-stars svg {
+        stroke: var(--amber);
+        fill: var(--amber);
+    }
+
+    .tcard-q {
+        font-family: var(--f-s);
+        font-style: italic;
+        font-size: clamp(13.5px, 1.4vw, 15px);
+        color: rgba(242, 234, 216, .58);
+        line-height: 1.82;
+        margin-bottom: var(--s8);
+    }
+
+    .tcard-author {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .tcard-name {
+        font-family: var(--f-c);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        color: rgba(242, 234, 216, .6);
+    }
+
+    .tcard-role {
+        font-size: 12px;
+        color: rgba(242, 234, 216, .28);
+    }
+
+    /* ── PROCESS ── */
+    .process {
+        background: var(--ink);
+    }
+
+    .proc-wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+    }
+
+    .proc-hdr {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: var(--sec-py) var(--px) var(--s14);
+        border-bottom: 1px solid var(--l-border);
+        flex-wrap: wrap;
+        gap: var(--s6);
+    }
+
+    .proc-h {
+        font-family: var(--f-d);
+        font-size: clamp(48px, 7.5vw, 104px);
+        line-height: .86;
+        letter-spacing: .02em;
+        color: var(--cream);
+    }
+
+    .proc-h span {
+        color: var(--amber);
+    }
+
+    .proc-sub {
+        font-family: var(--f-s);
+        font-style: italic;
+        font-size: 15px;
+        letter-spacing: .02em;
+        color: rgba(242, 234, 216, .36);
+        max-width: 300px;
+        line-height: 1.8;
+        padding-bottom: 6px;
+    }
+
+    .proc-rows {
+        padding: 0 var(--px);
+    }
+
+    .proc-row {
+        display: grid;
+        grid-template-columns: 80px 1fr 1fr;
+        border-top: 1px solid var(--l-border);
+        min-height: 180px;
+        transition: background var(--t2);
+    }
+
+    .proc-row:last-child {
+        border-bottom: 1px solid var(--l-border);
+    }
+
+    .proc-row:hover {
+        background: rgba(242, 234, 216, .018);
+    }
+
+    .proc-nn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--f-d);
+        font-size: clamp(50px, 7.5vw, 90px);
+        line-height: 1;
+        letter-spacing: -.04em;
+        color: rgba(242, 234, 216, .06);
+        border-right: 1px solid var(--l-border);
+        transition: color .5s;
+    }
+
+    .proc-row:hover .proc-nn {
+        color: rgba(242, 234, 216, .2);
+    }
+
+    .proc-l {
+        padding: 28px var(--s8);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid var(--l-border);
+    }
+
+    .proc-r {
+        padding: 28px var(--s8);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .proc-tag {
+        font-family: var(--f-c);
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: .28em;
+        text-transform: uppercase;
+        color: rgba(242, 234, 216, .28);
+        margin-bottom: 10px;
+        transition: color var(--t2);
+    }
+
+    .proc-row:hover .proc-tag {
+        color: var(--amber);
+    }
+
+    .proc-title {
+        font-family: var(--f-d);
+        font-size: clamp(22px, 2.8vw, 40px);
+        letter-spacing: .02em;
+        color: rgba(242, 234, 216, .3);
+        line-height: .92;
+        transition: color .5s;
+    }
+
+    .proc-row:hover .proc-title {
+        color: var(--cream);
+    }
+
+    .proc-ico {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 14px;
+        opacity: .32;
+        transition: opacity var(--t2), transform var(--t2);
+    }
+
+    .proc-ico svg {
+        stroke: var(--cream);
+    }
+
+    .proc-row:hover .proc-ico {
+        opacity: .9;
+        transform: scale(1.14) rotate(-5deg);
+    }
+
+    .proc-desc {
+        font-size: 14px;
+        color: rgba(242, 234, 216, .38);
+        line-height: 1.82;
+        font-weight: 300;
+        max-width: 380px;
+    }
+
+    .proc-cta {
+        padding: var(--s16) var(--px);
+        display: flex;
+        justify-content: center;
+    }
+
+    /* ── CTA ── */
+    .cta-sec {
+        background: var(--cream);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-ghost {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: var(--f-d);
+        font-size: clamp(68px, 14vw, 220px);
+        letter-spacing: -.02em;
+        line-height: 1;
+        color: transparent;
+        -webkit-text-stroke: 1.5px rgba(26, 26, 16, .055);
+        white-space: nowrap;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .cta-inner {
+        position: relative;
+        z-index: 2;
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: var(--sec-py) var(--px);
+        text-align: center;
+    }
+
+    .cta-h {
+        font-family: var(--f-d);
+        font-size: clamp(52px, 9vw, 132px);
+        line-height: .84;
+        letter-spacing: .02em;
+        color: var(--ink);
+        margin-bottom: var(--s12);
+    }
+
+    .cta-h span {
+        color: var(--amber);
+    }
+
+    .cta-btns {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: var(--s8);
+    }
+
+    .cta-sub {
+        font-family: var(--f-c);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: rgba(26, 26, 16, .3);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1100px) {
+
+        .about-wrap,
+        .feat-top,
+        .stats-top {
+            grid-template-columns: 1fr;
+        }
+
+        .av {
+            height: 380px;
+        }
+
+        .feat-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .ccard.feat {
+            grid-column: span 12;
+        }
+
+        .ccard.sm {
+            grid-column: span 6;
+        }
+
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .testi-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .proc-row {
+            grid-template-columns: 64px 1fr;
+        }
+
+        .proc-r {
+            display: none;
+        }
+
+        .hero-float-l,
+        .hero-float-r,
+        .hero-vert-r {
+            display: none;
+        }
+
+        .hero-body {
+            padding-top: calc(var(--nav-h)+60px);
+        }
+    }
+
+    @media(max-width:900px) {
+        .svc-row {
+            grid-template-columns: 56px 1fr;
+        }
+
+        .svc-ico,
+        .svc-arr,
+        .svc-d {
+            display: none;
+        }
+
+        .av-badge {
+            display: none;
+        }
+    }
+
+    @media(max-width:768px) {
+        .hero-stats {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .hs-cell {
+            padding: 18px;
+        }
+
+        .about-stats {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .feat-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .ccard.sm {
+            grid-column: span 12;
+        }
+
+        .ccard.feat .c-img {
+            height: 260px;
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .testi-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .proc-row {
+            min-height: auto;
+        }
+
+        .proc-l {
+            padding: 22px var(--s6);
+        }
+
+        .proc-nn {
+            font-size: 42px;
+        }
+    }
+
+    @media(max-width:540px) {
+
+        .hero-btns,
+        .cta-btns {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-h1 {
+            font-size: clamp(60px, 17vw, 120px);
+        }
+    }
+</style>
+
+<!-- ─── HERO ─────────────────────────────────────────────────── -->
+<section class="hero" aria-labelledby="h-hero">
+    <div class="h-glow hg1" aria-hidden="true"></div>
+    <div class="h-glow hg2" aria-hidden="true"></div>
+    <div class="h-glow hg3" aria-hidden="true"></div>
+    <div class="h-glow hg4" aria-hidden="true"></div>
+
+    <!-- Floating LEFT -->
+    <div class="hero-float-l" aria-hidden="true">
+        <div class="spin-badge">
+            <div class="spin-badge-ring">
+                <div class="spin-badge-inner">
+                    <span class="spin-badge-n">32%</span>
+                    <span class="spin-badge-l">OTT Share</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-chip">
+            <div class="hero-chip-dot"></div>
+            <div>
+                <div class="hero-chip-txt">Campaigns</div>
+                <div class="hero-chip-val">300+</div>
+            </div>
+        </div>
+        <div class="hero-chip" style="animation-delay:3s">
+            <div class="hero-chip-dot" style="background:var(--olive-l)"></div>
+            <div>
+                <div class="hero-chip-txt">Creators</div>
+                <div class="hero-chip-val">10K+</div>
+            </div>
+        </div>
+        <!-- <div class="hero-scroll-cue" style="margin-top:var(--s8)">
+            <div class="hero-scroll-line"></div>
+            <span class="hero-scroll-t">Scroll</span>
+        </div> -->
+    </div>
+
+    <!-- CENTER -->
+    <div class="hero-body">
+        <div class="hero-eye">India's Premier Cinema Marketing Studio</div>
+        <h1 class="hero-h1" id="h-hero">
+            <span class="line-solid">WHERE</span>
+            <span class="line-outline">CINEMA</span>
+            <span class="line-gold">MEETS</span>
+        </h1>
+        <p class="hero-sub">
+            One-stop solution for influencer marketing, meme campaigns, and viral content that powers 32% of all OTT releases.        </p>
+        <div class="hero-btns">
+            <a href="#hp-camp" class="btn btn-amber btn-lg">Explore Our Work</a>
+            <a href="https://filmycurry.com/contact" class="btn btn-ol-lt btn-lg">Start a Campaign</a>
+        </div>
+    </div>
+
+    <!-- Floating RIGHT -->
+    <div class="hero-float-r" aria-hidden="true">
+        <div class="hfc">
+            <div class="hfc-n" style="color:var(--amber)">300+</div>
+            <div class="hfc-l">Campaigns</div>
+        </div>
+        <div class="hfc-div"></div>
+        <div class="hfc">
+            <div class="hfc-n" style="color:var(--olive-l)">12M+</div>
+            <div class="hfc-l">People Reached</div>
+        </div>
+        <div class="hfc-div"></div>
+        <div class="hfc">
+            <div class="hfc-n" style="color:var(--cream)">70+</div>
+            <div class="hfc-l">Screenings</div>
+        </div>
+        <div class="hfc-div"></div>
+        <div class="hfc">
+            <div class="hfc-n" style="color:var(--amber-3)">150+</div>
+            <div class="hfc-l">Films Promoted</div>
+        </div>
+    </div>
+
+    <!-- Vertical right label -->
+    <!-- <div class="hero-vert-r" aria-hidden="true">Cinema · Culture · Commerce</div> -->
+
+    <!-- Stats bar -->
+    <!-- <div class="hero-stats" aria-label="Key metrics">
+                    <div class="hs-cell">
+                <div class="hs-n">300+</div>
+                <div class="hs-l">Campaigns</div>
+            </div>
+                    <div class="hs-cell">
+                <div class="hs-n">32%</div>
+                <div class="hs-l">OTT Releases</div>
+            </div>
+                    <div class="hs-cell">
+                <div class="hs-n">12M+</div>
+                <div class="hs-l">People Reached</div>
+            </div>
+                    <div class="hs-cell">
+                <div class="hs-n">150+</div>
+                <div class="hs-l">Films Promoted</div>
+            </div>
+            </div> -->
+</section>
+
+<!-- ─── TICKER ─────────────────────────────────────────────── -->
+<div class="ticker" aria-hidden="true">
+    <div class="mq-wrap">
+        <div class="mq-track mq-l" style="--d:32s">
+                            <span class="tk-w">WHERE CINEMA MEETS CULTURE</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">INFLUENCER MARKETING</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">FILM PROMOTIONS</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">MEME MARKETING</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">VIDEO PRODUCTION</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">CELEBRITY ENDORSEMENTS</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">OTT STRATEGY</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">ON-GROUND ACTIVATIONS</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">WHERE CINEMA MEETS CULTURE</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">INFLUENCER MARKETING</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">FILM PROMOTIONS</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">MEME MARKETING</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">VIDEO PRODUCTION</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">CELEBRITY ENDORSEMENTS</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">OTT STRATEGY</span><span class="tk-sep">&#8725;</span>
+                            <span class="tk-w">ON-GROUND ACTIVATIONS</span><span class="tk-sep">&#8725;</span>
+                    </div>
+    </div>
+</div>
+
+<!-- ─── BRANDS ─────────────────────────────────────────────── -->
+<div class="brands" aria-label="Brand partners">
+    <div class="mq-wrap">
+        <div class="mq-track mq-l" style="--d:40s">
+                            <span class="brand-chip">Netflix</span>
+                            <span class="brand-chip">Amazon Prime</span>
+                            <span class="brand-chip">Disney+</span>
+                            <span class="brand-chip">Dharma Productions</span>
+                            <span class="brand-chip">YRF</span>
+                            <span class="brand-chip">Sony Pictures</span>
+                            <span class="brand-chip">T-Series</span>
+                            <span class="brand-chip">Warner Bros</span>
+                            <span class="brand-chip">Zee5</span>
+                            <span class="brand-chip">JioCinema</span>
+                            <span class="brand-chip">Maddock Films</span>
+                            <span class="brand-chip">boAt</span>
+                            <span class="brand-chip">Myntra</span>
+                            <span class="brand-chip">OnePlus</span>
+                            <span class="brand-chip">Fastrack</span>
+                            <span class="brand-chip">Viacom18</span>
+                            <span class="brand-chip">Netflix</span>
+                            <span class="brand-chip">Amazon Prime</span>
+                            <span class="brand-chip">Disney+</span>
+                            <span class="brand-chip">Dharma Productions</span>
+                            <span class="brand-chip">YRF</span>
+                            <span class="brand-chip">Sony Pictures</span>
+                            <span class="brand-chip">T-Series</span>
+                            <span class="brand-chip">Warner Bros</span>
+                            <span class="brand-chip">Zee5</span>
+                            <span class="brand-chip">JioCinema</span>
+                            <span class="brand-chip">Maddock Films</span>
+                            <span class="brand-chip">boAt</span>
+                            <span class="brand-chip">Myntra</span>
+                            <span class="brand-chip">OnePlus</span>
+                            <span class="brand-chip">Fastrack</span>
+                            <span class="brand-chip">Viacom18</span>
+                    </div>
+    </div>
+</div>
+
+<!-- ─── ABOUT ─────────────────────────────────────────────── -->
+<section class="about" aria-labelledby="h-about">
+    <div class="about-wrap">
+        <div>
+            <p class="s-lbl rv" style="color:var(--amber);margin-bottom:16px">Who We Are</p>
+            <h2 id="h-about" class="about-h rv d1">CRAFTING<br><span class="ul">CINEMATIC</span><br>IMPACT</h2>
+            <p class="about-body rv d2">
+                FilmyCurry specialises in crafting authentic connections between brands and influencers to amplify reach, drive engagement, and spark meaningful conversations across entertainment, culture, and commerce.            </p>
+            <a href="https://filmycurry.com/about" class="about-cta rv d3">Our Full Story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            <div class="about-stats rv d4">
+                                    <div class="as-c">
+                        <div class="as-n" style="color:var(--amber)">300+</div>
+                        <div class="as-l">Campaigns</div>
+                    </div>
+                                    <div class="as-c">
+                        <div class="as-n" style="color:var(--olive-l)">32%</div>
+                        <div class="as-l">OTT Releases</div>
+                    </div>
+                                    <div class="as-c">
+                        <div class="as-n" style="color:var(--amber)">12M+</div>
+                        <div class="as-l">Reached</div>
+                    </div>
+                                    <div class="as-c">
+                        <div class="as-n" style="color:var(--olive-l)">70+</div>
+                        <div class="as-l">Screenings</div>
+                    </div>
+                            </div>
+        </div>
+        <div class="av rv sr d2">
+            <div class="av-badge">
+                <div class="av-badge-n">32%</div>
+                <div class="av-badge-l">Of All OTT Releases</div>
+            </div>
+            <div class="av-main">
+                <div class="av-yr" aria-hidden="true">2026</div>
+                <div class="av-facts">
+                                            <div class="av-fact">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 2H3a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1V3a1 1 0 00-1-1zm10 0h-4a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1V3a1 1 0 00-1-1zM7 9H3a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1v-3a1 1 0 00-1-1zm10 0h-4a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1v-3a1 1 0 00-1-1zM7 16H3a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1v-3a1 1 0 00-1-1zm10 0h-4a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1v-3a1 1 0 00-1-1z"/><path d="M2 7h20M2 12h20M2 17h20"/></svg>                            <span class="av-ft">End-to-End Campaign Management</span>
+                        </div>
+                                            <div class="av-fact">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>                            <span class="av-ft">10,000+ Creator Network</span>
+                        </div>
+                                            <div class="av-fact">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>                            <span class="av-ft">Pan-India Coverage</span>
+                        </div>
+                                            <div class="av-fact">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>                            <span class="av-ft">24–48h Response Time</span>
+                        </div>
+                                            <div class="av-fact">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>                            <span class="av-ft">300+ Successful Campaigns</span>
+                        </div>
+                                            <div class="av-fact">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>                            <span class="av-ft">32% of All OTT Releases</span>
+                        </div>
+                                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FEATURES ─────────────────────────────────────────── -->
+<section class="features">
+    <div class="feat-wrap">
+        <div class="feat-top">
+            <div class="rv sl">
+                <p class="s-lbl" style="color:var(--olive);margin-bottom:14px">Our Strengths</p>
+                <h2 style="font-family:var(--f-d);font-size:clamp(44px,7vw,92px);line-height:.88;letter-spacing:.02em">
+                    WHY <span style="color:var(--amber)">CHOOSE US</span></h2>
+            </div>
+            <p class="feat-sub rv sr">A refined studio crafting authentic campaigns that move audiences and build
+                lasting brand authority across India's entertainment landscape.</p>
+        </div>
+        <div class="feat-grid rv ss d2">
+                            <div class="fc rv d1">
+                    <div class="fc-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+                    <div class="fc-t">Cultural Intelligence</div>
+                    <p class="fc-d">We know what trends before it does — our team lives and breathes pop culture every single day.</p>
+                </div>
+                            <div class="fc rv d2">
+                    <div class="fc-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+                    <div class="fc-t">24–48h Turnaround</div>
+                    <p class="fc-d">Lightning-fast execution without compromising quality. Your campaign launch never waits on us.</p>
+                </div>
+                            <div class="fc rv d3">
+                    <div class="fc-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+                    <div class="fc-t">10,000+ Creators</div>
+                    <p class="fc-d">Access to authentic voices for every niche, genre, and audience segment across India.</p>
+                </div>
+                            <div class="fc rv d4">
+                    <div class="fc-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></div>
+                    <div class="fc-t">Data-Driven</div>
+                    <p class="fc-d">Every campaign is monitored in real time and optimised for maximum cultural resonance and ROI.</p>
+                </div>
+                            <div class="fc rv d5">
+                    <div class="fc-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 2H3a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1V3a1 1 0 00-1-1zm10 0h-4a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1V3a1 1 0 00-1-1zM7 9H3a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1v-3a1 1 0 00-1-1zm10 0h-4a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1v-3a1 1 0 00-1-1zM7 16H3a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1v-3a1 1 0 00-1-1zm10 0h-4a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1v-3a1 1 0 00-1-1z"/><path d="M2 7h20M2 12h20M2 17h20"/></svg></div>
+                    <div class="fc-t">OTT Expertise</div>
+                    <p class="fc-d">We have powered 32% of all OTT releases — no one understands streaming promotion like we do.</p>
+                </div>
+                            <div class="fc rv d6">
+                    <div class="fc-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+                    <div class="fc-t">End-to-End</div>
+                    <p class="fc-d">From strategy to execution, we handle everything so you can focus on what matters most.</p>
+                </div>
+                    </div>
+    </div>
+</section>
+
+<!-- ─── SERVICES ─────────────────────────────────────────── -->
+<section class="services" aria-labelledby="h-svc">
+    <div class="svc-wrap">
+        <div class="svc-hdr">
+            <div class="rv">
+                <p class="s-lbl" style="color:rgba(242,234,216,.28);margin-bottom:14px">What We Do</p>
+                <h2 id="h-svc" class="svc-h">OUR <span>SERVICES</span></h2>
+            </div>
+            <a href="https://filmycurry.com/contact" class="btn btn-ol-lt rv" style="align-self:flex-end">Work With Us</a>
+        </div>
+        <ul class="svc-list">
+                            <li class="svc-row rv d1">
+                    <span class="svc-num">01</span>
+                    <div class="svc-body">
+                        <span class="svc-t">Influencer Marketing</span>
+                        <span class="svc-d">Precision-matched creator partnerships — nano to celebrity — that feel authentic and perform powerfully.</span>
+                    </div>
+                    <div class="svc-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+                    <div class="svc-arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+                </li>
+                            <li class="svc-row rv d2">
+                    <span class="svc-num">02</span>
+                    <div class="svc-body">
+                        <span class="svc-t">Meme Marketing</span>
+                        <span class="svc-d">Culturally embedded viral content crafted to spread because it belongs, not because it was placed.</span>
+                    </div>
+                    <div class="svc-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 2H3a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1V3a1 1 0 00-1-1zm10 0h-4a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1V3a1 1 0 00-1-1zM7 9H3a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1v-3a1 1 0 00-1-1zm10 0h-4a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1v-3a1 1 0 00-1-1zM7 16H3a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1v-3a1 1 0 00-1-1zm10 0h-4a1 1 0 00-1 1v3a1 1 0 001 1h4a1 1 0 001-1v-3a1 1 0 00-1-1z"/><path d="M2 7h20M2 12h20M2 17h20"/></svg></div>
+                    <div class="svc-arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+                </li>
+                            <li class="svc-row rv d3">
+                    <span class="svc-num">03</span>
+                    <div class="svc-body">
+                        <span class="svc-t">Film Promotions</span>
+                        <span class="svc-d">End-to-end cinematic promotion strategy. We power the buzz that fills seats and drives streams.</span>
+                    </div>
+                    <div class="svc-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+                    <div class="svc-arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+                </li>
+                            <li class="svc-row rv d4">
+                    <span class="svc-num">04</span>
+                    <div class="svc-body">
+                        <span class="svc-t">Video Production</span>
+                        <span class="svc-d">Concept, craft, deliver. Brand films to web series — OTT-grade quality at studio speed.</span>
+                    </div>
+                    <div class="svc-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+                    <div class="svc-arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+                </li>
+                            <li class="svc-row rv d5">
+                    <span class="svc-num">05</span>
+                    <div class="svc-body">
+                        <span class="svc-t">Film Screenings</span>
+                        <span class="svc-d">Curated influencer screening events generating authentic pre-release buzz at scale.</span>
+                    </div>
+                    <div class="svc-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+                    <div class="svc-arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+                </li>
+                            <li class="svc-row rv d1">
+                    <span class="svc-num">06</span>
+                    <div class="svc-body">
+                        <span class="svc-t">On-Ground Activations</span>
+                        <span class="svc-d">Real-world brand moments bridging digital reach with physical memory.</span>
+                    </div>
+                    <div class="svc-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                    <div class="svc-arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+                </li>
+                            <li class="svc-row rv d2">
+                    <span class="svc-num">07</span>
+                    <div class="svc-body">
+                        <span class="svc-t">LinkedIn &amp; X Strategy</span>
+                        <span class="svc-d">Platform-native campaigns building authority for studios and executive voices.</span>
+                    </div>
+                    <div class="svc-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+                    <div class="svc-arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+                </li>
+                            <li class="svc-row rv d3">
+                    <span class="svc-num">08</span>
+                    <div class="svc-body">
+                        <span class="svc-t">Celebrity Endorsements</span>
+                        <span class="svc-d">Curated star partnerships that amplify brand credibility and unlock millions of loyal followers.</span>
+                    </div>
+                    <div class="svc-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.4)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                    <div class="svc-arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(242,234,216,.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+                </li>
+                    </ul>
+    </div>
+</section>
+
+<!-- ─── CAMPAIGNS ─────────────────────────────────────────── -->
+<section class="campaigns" id="hp-camp" aria-labelledby="h-camp">
+    <div class="camp-wrap">
+        <div class="camp-hdr">
+            <div class="rv sl">
+                <p class="s-lbl" style="color:var(--olive);margin-bottom:14px">Case Studies</p>
+                <h2 id="h-camp" class="camp-h">SIGNATURE <span>CAMPAIGNS</span></h2>
+            </div>
+            <a href="https://filmycurry.com/work" class="camp-see rv sr">View All Work
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+        <div class="camp-grid rv ss">
+                            <div class="camp-empty">
+                    <p class="camp-empty-h">Coming Soon</p>
+                    <p style="font-size:14px;color:rgba(242,234,216,.18)">Great campaigns in the making — check back soon.
+                    </p>
+                </div>
+                        </div>
+    </div>
+</section>
+
+<!-- ─── STATS ─────────────────────────────────────────────── -->
+<section class="stats-sec" aria-label="Studio statistics">
+    <div class="stats-inner">
+        <div class="stats-top">
+            <h2 class="stats-h rv sl">NUMBERS THAT<br><span>SPEAK</span></h2>
+            <p class="stats-sub rv sr">Measurable results that prove cultural impact at scale — campaign after campaign,
+                release after release.</p>
+        </div>
+        <div class="stats-grid rv ss d1">
+                            <div class="stat-cell rv d1">
+                    <div class="stat-n"><span data-target="300" data-suffix="+">0+</span>
+                    </div>
+                    <div class="stat-l">Campaigns Delivered</div>
+                </div>
+                            <div class="stat-cell rv d2">
+                    <div class="stat-n"><span data-target="12" data-suffix="M+">0M+</span>
+                    </div>
+                    <div class="stat-l">Million People Reached</div>
+                </div>
+                            <div class="stat-cell rv d3">
+                    <div class="stat-n"><span data-target="32" data-suffix="%">0%</span>
+                    </div>
+                    <div class="stat-l">Of All OTT Releases</div>
+                </div>
+                            <div class="stat-cell rv d4">
+                    <div class="stat-n"><span data-target="70" data-suffix="+">0+</span>
+                    </div>
+                    <div class="stat-l">Influencer Screenings</div>
+                </div>
+                    </div>
+    </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─────────────────────────────────────── -->
+<section class="testi" aria-labelledby="h-testi">
+    <div class="testi-wrap">
+        <div class="testi-hdr">
+            <div class="rv sl">
+                <p class="s-lbl" style="color:var(--olive-d);margin-bottom:14px">Client Love</p>
+                <h2 id="h-testi" class="testi-h">WHAT CLIENTS <em>Say</em></h2>
+            </div>
+        </div>
+        <div class="testi-grid rv ss">
+                            <div class="tcard rv d1">
+                    <div class="tcard-qi"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--amber-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg></div>
+                    <div class="tcard-stars">
+                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>                    </div>
+                    <blockquote class="tcard-q">&quot;Filmy Curry turned our OTT launch into a cultural moment. 3M+ organic impressions in 72 hours.&quot;</blockquote>
+                    <div class="tcard-author">
+                        <cite class="tcard-name">Priya S.</cite>
+                        <span class="tcard-role">Marketing Head, Major OTT Platform</span>
+                    </div>
+                </div>
+                            <div class="tcard rv d2">
+                    <div class="tcard-qi"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--amber-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg></div>
+                    <div class="tcard-stars">
+                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>                    </div>
+                    <blockquote class="tcard-q">&quot;Their meme strategy was unmatched. Content felt native, not paid — that&#039;s extraordinarily rare.&quot;</blockquote>
+                    <div class="tcard-author">
+                        <cite class="tcard-name">Rohit K.</cite>
+                        <span class="tcard-role">Producer, Bollywood Production House</span>
+                    </div>
+                </div>
+                            <div class="tcard rv d3">
+                    <div class="tcard-qi"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--amber-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg></div>
+                    <div class="tcard-stars">
+                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>                    </div>
+                    <blockquote class="tcard-q">&quot;From strategy to execution, absolutely flawless. 40% above-target reach on our influencer campaign.&quot;</blockquote>
+                    <div class="tcard-author">
+                        <cite class="tcard-name">Meera V.</cite>
+                        <span class="tcard-role">Brand Manager, Consumer Electronics</span>
+                    </div>
+                </div>
+                    </div>
+    </div>
+</section>
+
+<!-- ─── PROCESS ──────────────────────────────────────────── -->
+<section class="process" aria-labelledby="h-proc">
+    <div class="proc-wrap">
+        <div class="proc-hdr">
+            <div class="rv">
+                <p class="s-lbl" style="color:rgba(242,234,216,.26);margin-bottom:14px">How We Work</p>
+                <h2 id="h-proc" class="proc-h">OUR <span>PROCESS</span></h2>
+            </div>
+            <p class="proc-sub rv d2">A refined four-act framework that transforms brands into cultural icons —
+                consistently.</p>
+        </div>
+        <ul class="proc-rows">
+                            <li class="proc-row rv d1">
+                    <div class="proc-nn" aria-hidden="true">01</div>
+                    <div class="proc-l">
+                        <div class="proc-tag">01 &mdash; Strategy &amp; Discovery</div>
+                        <div class="proc-title">STRATEGY &AMP; DISCOVERY</div>
+                    </div>
+                    <div class="proc-r">
+                        <div class="proc-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--cream)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+                        <p class="proc-desc">Deep-dive into brand soul, audience nuance, and cultural context before a single frame is shot.</p>
+                    </div>
+                </li>
+                            <li class="proc-row rv d2">
+                    <div class="proc-nn" aria-hidden="true">02</div>
+                    <div class="proc-l">
+                        <div class="proc-tag">02 &mdash; Network &amp; Matching</div>
+                        <div class="proc-title">NETWORK &AMP; MATCHING</div>
+                    </div>
+                    <div class="proc-r">
+                        <div class="proc-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--cream)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+                        <p class="proc-desc">Match with ideal influencers from our curated pool of 10,000+ accounts across every niche.</p>
+                    </div>
+                </li>
+                            <li class="proc-row rv d3">
+                    <div class="proc-nn" aria-hidden="true">03</div>
+                    <div class="proc-l">
+                        <div class="proc-tag">03 &mdash; Execute &amp; Launch</div>
+                        <div class="proc-title">EXECUTE &AMP; LAUNCH</div>
+                    </div>
+                    <div class="proc-r">
+                        <div class="proc-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--cream)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
+                        <p class="proc-desc">Precision campaigns with real-time monitoring, creative iteration, and A/B optimisation.</p>
+                    </div>
+                </li>
+                            <li class="proc-row rv d4">
+                    <div class="proc-nn" aria-hidden="true">04</div>
+                    <div class="proc-l">
+                        <div class="proc-tag">04 &mdash; Scale &amp; Compound</div>
+                        <div class="proc-title">SCALE &AMP; COMPOUND</div>
+                    </div>
+                    <div class="proc-r">
+                        <div class="proc-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--cream)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></div>
+                        <p class="proc-desc">Analyse, optimise, double down on winners. Compound momentum until your brand owns the conversation.</p>
+                    </div>
+                </li>
+                    </ul>
+        <div class="proc-cta rv"><a href="https://filmycurry.com/contact" class="btn btn-amber btn-lg">Start Your Campaign
+                &rarr;</a></div>
+    </div>
+</section>
+
+<!-- ─── CTA ──────────────────────────────────────────────── -->
+<section class="cta-sec" aria-label="Call to action">
+    <div class="cta-ghost" aria-hidden="true">Extraordinary</div>
+    <div class="cta-inner">
+        <p class="s-lbl rv" style="color:var(--olive);justify-content:center;margin:0 auto 18px">Ready to Begin?</p>
+        <h2 class="cta-h rv d1">LET&#8217;S CREATE<br>SOMETHING <span>EXTRAORDINARY</span></h2>
+        <div class="cta-btns rv d2">
+            <a href="https://filmycurry.com/contact" class="btn btn-ink btn-lg">Start a Campaign</a>
+            <a href="mailto:contact@filmycurry.com"
+                class="btn btn-ol-dk btn-lg">Email Us</a>
+        </div>
+        <p class="cta-sub rv d3">
+            +91 9990802115 &nbsp;&middot;&nbsp;
+            contact@filmycurry.com        </p>
+    </div>
+</section>
+
+<script>
+    (function() {
+        function fixCamp() {
+            var f = document.querySelector('.ccard.feat'),
+                sm = document.querySelectorAll('.ccard.sm');
+            if (!f) return;
+            var w = window.innerWidth;
+            f.style.gridColumn = w <= 1100 ? 'span 12' : 'span 8';
+            sm.forEach(function(c) {
+                c.style.gridColumn = w <= 768 ? 'span 12' : w <= 1100 ? 'span 6' : 'span 4';
+            });
+        }
+        fixCamp();
+        window.addEventListener('resize', fixCamp, {
+            passive: true
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+            a.addEventListener('click', function(e) {
+                var t = document.querySelector(this.getAttribute('href'));
+                if (t) {
+                    e.preventDefault();
+                    t.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    }());
+</script></main>
+
+    <!-- FOOTER -->
+    <footer id="g-foot" role="contentinfo">
+        <div class="foot-top">
+            <div class="foot-banner" aria-hidden="true">Filmy Curry</div>
+        </div>
+        <div class="foot-divider"></div>
+        <div class="foot-inner">
+            <div class="foot-grid">
+                <!-- Brand col -->
+                <div>
+                    <div class="foot-brand-name">Filmy<br>Curry</div>
+                    <div class="foot-brand-sub">Cinema Marketing Studio</div>
+                    <p class="foot-tag">Where Cinema Meets Culture &mdash; India&#8217;s trusted partner for influencer
+                        &amp; film marketing.</p>
+                    <div class="foot-social">
+                        <a href="#" class="foot-soc-a" data-no-wipe>Instagram</a>
+                        <a href="#" class="foot-soc-a" data-no-wipe>LinkedIn</a>
+                        <a href="#" class="foot-soc-a" data-no-wipe>X</a>
+                    </div>
+                </div>
+                <!-- Nav col -->
+                <div>
+                    <p class="foot-col-h">Navigate</p>
+                    <a href="https://filmycurry.com/" class="foot-a">Home</a>
+                    <a href="https://filmycurry.com/about" class="foot-a">About Us</a>
+                    <a href="https://filmycurry.com/work" class="foot-a">Our Work</a>
+                    <a href="https://filmycurry.com/contact" class="foot-a">Contact</a>
+                </div>
+                <!-- Contact col -->
+                <div>
+                    <p class="foot-col-h">Contact</p>
+                    <div class="foot-contact-item">
+                        <div class="foot-contact-icon">@</div>
+                        <div>
+                            <div class="foot-contact-label">Email</div>
+                            <a href="mailto:contact@filmycurry.com"
+                                class="foot-contact-val" style="color:rgba(242,234,216,.52);transition:color .2s"
+                                onmouseover="this.style.color='#E8A820'"
+                                onmouseout="this.style.color='rgba(242,234,216,.52)'">contact@filmycurry.com</a>
+                        </div>
+                    </div>
+                    <div class="foot-contact-item">
+                        <div class="foot-contact-icon" style="font-size:12px">&#9742;</div>
+                        <div>
+                            <div class="foot-contact-label">Phone</div>
+                            <a href="tel:+91 9990802115" class="foot-contact-val"
+                                style="color:rgba(242,234,216,.52);transition:color .2s"
+                                onmouseover="this.style.color='#E8A820'"
+                                onmouseout="this.style.color='rgba(242,234,216,.52)'">+91 9990802115</a>
+                        </div>
+                    </div>
+                    <div class="foot-contact-item">
+                        <div class="foot-contact-icon" style="font-size:12px">&#9679;</div>
+                        <div>
+                            <div class="foot-contact-label">Location</div>
+                            <div class="foot-contact-val">Indore, delhi, India</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="foot-bot">
+                <p class="foot-copy">&copy; 2026 FilmyCurry. All rights reserved.
+                </p>
+                <div class="foot-badge">
+                    <svg width="10" height="14" viewBox="0 0 12 18" fill="none">
+                        <path d="M7 1L1 10h5l-1 7L11 8H6L7 1Z" fill="#D4920A" />
+                    </svg>
+                    Crafted with passion in India
+                </div>
+                <p class="foot-copy">India's Premier Cinema Studio</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            'use strict';
+            /* scroll progress + nav pin */
+            var nav = document.getElementById('g-nav'),
+                prog = document.getElementById('g-prog');
+            window.addEventListener('scroll', function() {
+                var y = window.scrollY,
+                    pct = y / (document.body.scrollHeight - window.innerHeight) * 100;
+                if (prog) prog.style.width = Math.min(pct, 100) + '%';
+                if (nav) y > 60 ? nav.classList.add('pinned') : nav.classList.remove('pinned');
+            }, {
+                passive: true
+            });
+
+            /* fullscreen menu */
+            var open = false;
+            window.gMenu = function() {
+                open = !open;
+                var m = document.getElementById('g-menu'),
+                    b = document.getElementById('g-mbtn'),
+                    l1 = document.getElementById('hl1'),
+                    l2 = document.getElementById('hl2');
+                if (!m) return;
+                m.classList.toggle('open', open);
+                document.body.style.overflow = open ? 'hidden' : '';
+                if (b) b.setAttribute('aria-expanded', open);
+                if (l1) l1.style.transform = open ? 'rotate(45deg) translate(3px,3.5px)' : '';
+                if (l2) l2.style.transform = open ? 'rotate(-45deg) translate(3px,-3.5px)' : '';
+            };
+            document.querySelectorAll('#g-menu a').forEach(function(a) {
+                a.addEventListener('click', function() {
+                    if (open) gMenu();
+                });
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && open) gMenu();
+            });
+
+            /* scroll reveal */
+            var rvs = document.querySelectorAll('.rv');
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(e) {
+                        if (e.isIntersecting) {
+                            e.target.classList.add('in');
+                            io.unobserve(e.target);
+                        }
+                    });
+                }, {
+                    threshold: .07,
+                    rootMargin: '0px 0px -16px 0px'
+                });
+                rvs.forEach(function(el) {
+                    io.observe(el);
+                });
+            } else {
+                rvs.forEach(function(el) {
+                    el.classList.add('in');
+                });
+            }
+
+            /* counters */
+            function animCnt(el) {
+                var t = parseFloat(el.dataset.target) || 0,
+                    suf = el.dataset.suffix || '',
+                    dur = 1900,
+                    step = 14,
+                    cur = 0,
+                    inc = t / (dur / step);
+                var timer = setInterval(function() {
+                    cur += inc;
+                    if (cur >= t) {
+                        cur = t;
+                        clearInterval(timer);
+                    }
+                    el.textContent = Math.floor(cur) + suf;
+                }, step);
+            }
+            var co = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting) {
+                        animCnt(e.target);
+                        co.unobserve(e.target);
+                    }
+                });
+            }, {
+                threshold: .5
+            });
+            document.querySelectorAll('[data-target]').forEach(function(el) {
+                co.observe(el);
+            });
+
+            /* page wipe transitions */
+            document.querySelectorAll('a[href]').forEach(function(a) {
+                var href = a.getAttribute('href');
+                if (!href || href[0] === '#' || href.startsWith('mailto') || href.startsWith('tel') || href
+                    .startsWith('javascript') || a.target === '_blank' || a.hasAttribute('data-no-wipe'))
+                    return;
+                a.addEventListener('click', function(e) {
+                    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+                    e.preventDefault();
+                    var w = document.getElementById('g-wipe');
+                    if (w) {
+                        w.style.cssText =
+                            'animation:none;transform:scaleY(0);transform-origin:bottom;transition:transform .46s cubic-bezier(.4,0,.2,1);';
+                        requestAnimationFrame(function() {
+                            requestAnimationFrame(function() {
+                                w.style.transform = 'scaleY(1)';
+                                setTimeout(function() {
+                                    window.location.href = href;
+                                }, 480);
+                            });
+                        });
+                    } else {
+                        window.location.href = href;
+                    }
+                });
+            });
+        }());
+    </script>
+</body>
+
+</html>

@@ -11,7 +11,9 @@ export default function ExpertisePage() {
     <main className="flex-1">
       {/* 1. GOLDEN */}
       <div data-theme="golden">
-        <Expertise />
+        <div className="">
+          <Expertise />
+        </div>
       </div>
     </main>
   );

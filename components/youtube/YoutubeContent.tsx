@@ -1,12 +1,13 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { ArrowRight, X } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { formatCompactNumber, formatTimeAgo, YouTubeChannel, YouTubeVideo } from '@/lib/youtube';
+import { useGlobalTheme } from '@/components/providers/ThemeProvider';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -32,7 +33,7 @@ export default function YoutubeContent({ channelData, latestVideos }: Props) {
   const copyRef = useRef<HTMLParagraphElement>(null);
   const statsContainerRef = useRef<HTMLDivElement>(null);
   const statRefs = useRef<HTMLDivElement[]>([]);
-  const videoRefs = useRef<HTMLAnchorElement[]>([]);
+  const videoRefs = useRef<HTMLDivElement[]>([]);
 
   const addToHeadingRefs = (el: HTMLSpanElement | null) => {
     if (el && !headingRefs.current.includes(el)) headingRefs.current.push(el);
@@ -43,15 +44,17 @@ export default function YoutubeContent({ channelData, latestVideos }: Props) {
   };
 
   const addToVideoRefs = (el: HTMLDivElement | null) => {
-    if (el && !videoRefs.current.includes(el as any)) videoRefs.current.push(el as any);
+    if (el && !videoRefs.current.includes(el)) videoRefs.current.push(el);
   };
 
+  const { theme } = useGlobalTheme();
+
   useGSAP(() => {
+    if (theme === 'noir_new') return;
+    
     const mm = gsap.matchMedia();
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
-      // No background transition needed — section stays dark
-
       // Intro Elements
       gsap.set(topDividerRef.current, { scaleX: 0, transformOrigin: 'left center' });
       gsap.set(eyebrowRef.current, { opacity: 0, y: 20 });
@@ -85,7 +88,6 @@ export default function YoutubeContent({ channelData, latestVideos }: Props) {
           ease: 'power3.out'
         });
 
-        // Count up animation
         const counters = gsap.utils.toArray('.stat-counter') as HTMLElement[];
         counters.forEach((counter) => {
           const target = parseFloat(counter.getAttribute('data-target') || '0');
@@ -100,12 +102,7 @@ export default function YoutubeContent({ channelData, latestVideos }: Props) {
                 start: 'top 85%',
               },
               onUpdate: function () {
-                // Add abbreviations like M or K to the number during animation
-                // We use the imported formatCompactNumber function!
                 const val = Math.ceil(Number(this.targets()[0].innerHTML));
-                
-                // Let's implement the format logic inline since formatCompactNumber is imported 
-                // but might not be available in this scope or context correctly during GSAP update
                 if (val >= 100000000) {
                   counter.innerHTML = (val / 1000000).toFixed(0) + 'M';
                 } else if (val >= 1000000) {
@@ -134,10 +131,8 @@ export default function YoutubeContent({ channelData, latestVideos }: Props) {
           ease: 'power3.out'
         });
       }
-
     });
 
-    // Reduced motion fallback
     mm.add('(prefers-reduced-motion: reduce)', () => {
       gsap.set([
         container.current, topDividerRef.current, eyebrowRef.current, ...headingRefs.current,
@@ -151,7 +146,117 @@ export default function YoutubeContent({ channelData, latestVideos }: Props) {
     });
 
     return () => mm.revert();
-  }, { scope: container });
+  }, { scope: container, dependencies: [theme] });
+
+  if (theme === 'noir_new') {
+    return (
+      <section 
+        id="youtube"
+        ref={container}
+        className="relative bg-primary-dark text-pure-white pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden px-4 md:px-16 lg:px-24"
+      >
+        <div className="relative z-10 w-full">
+          
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 gap-12">
+            {/* Left: Heading */}
+            <div className="flex flex-col">
+              <div className="text-xs md:text-sm font-bold tracking-[0.25em] text-brand-gold uppercase mb-6">
+                VMONE REVIEWS
+              </div>
+              <h2 className="font-display font-black uppercase leading-[0.9] tracking-tight md:tracking-tighter text-brand-gold text-[clamp(4rem,8vw,10rem)] max-w-[600px]">
+                LATEST REVIEWS.
+              </h2>
+            </div>
+
+            {/* Right: Stats */}
+            {channelData && (
+              <div ref={statsContainerRef} className="flex gap-8 md:gap-12">
+                <div ref={addToStatRefs} className="flex flex-col gap-1 text-right md:text-left">
+                  <div className="stat-counter font-display font-bold text-2xl md:text-4xl tracking-tighter text-brand-gold" data-target={channelData.subscriberCount}>
+                    {formatCompactNumber(channelData.subscriberCount)}
+                  </div>
+                  <div className="text-[10px] md:text-xs font-bold tracking-widest text-brand-silver uppercase">SUBSCRIBERS</div>
+                </div>
+                <div ref={addToStatRefs} className="flex flex-col gap-1 text-right md:text-left">
+                  <div className="stat-counter font-display font-bold text-2xl md:text-4xl tracking-tighter text-brand-gold" data-target={channelData.viewCount}>
+                    {formatCompactNumber(channelData.viewCount)}
+                  </div>
+                  <div className="text-[10px] md:text-xs font-bold tracking-widest text-brand-silver uppercase">TOTAL VIEWS</div>
+                </div>
+                <div ref={addToStatRefs} className="flex flex-col gap-1 text-right md:text-left">
+                  <div className="stat-counter font-display font-bold text-2xl md:text-4xl tracking-tighter text-brand-gold" data-target={channelData.videoCount}>
+                    {formatCompactNumber(channelData.videoCount)}
+                  </div>
+                  <div className="text-[10px] md:text-xs font-bold tracking-widest text-brand-silver uppercase">VIDEOS</div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Videos Grid - 2 columns */}
+          {latestVideos && latestVideos.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+              {latestVideos.slice(0, 4).map((video) => (
+                <div 
+                  key={video.id}
+                  ref={addToVideoRefs}
+                  className="group flex flex-col gap-5 text-left bg-secondary-dark p-6 rounded-sm border border-brand-silver/10"
+                >
+                  <div className="relative aspect-video w-full overflow-hidden bg-primary-dark">
+                    {activeVideoId === video.id ? (
+                      <iframe 
+                        src={`https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0`}
+                        title={video.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full border-0"
+                      />
+                    ) : (
+                      <div 
+                        className="absolute inset-0 cursor-pointer"
+                        onClick={() => setActiveVideoId(video.id)}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveVideoId(video.id); } }}
+                        aria-label={`Play ${video.title}`}
+                      >
+                        {video.thumbnail && (
+                          <Image 
+                            src={video.thumbnail} 
+                            alt={video.title}
+                            fill
+                            className="object-cover transition-all duration-700 ease-out group-hover:scale-105"
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            unoptimized={true}
+                          />
+                        )}
+                        <div className="absolute inset-0 bg-primary-dark/10 transition-colors duration-500 group-hover:bg-transparent" />
+                      </div>
+                    )}
+                  </div>
+                  
+                  <div className="flex flex-col gap-3">
+                    <h4 className="font-display text-xl md:text-2xl font-bold leading-tight text-brand-gold group-hover:text-pure-white transition-colors duration-300 line-clamp-2">
+                      {video.title}
+                    </h4>
+                    <div className="flex items-center gap-3 text-xs md:text-sm font-medium tracking-widest text-brand-silver uppercase">
+                      {video.viewCount && (
+                        <>
+                          <span>{Number(video.viewCount).toLocaleString('en-US')} VIEWS</span>
+                          <span className="w-1 h-1 rounded-full bg-brand-silver/50" />
+                        </>
+                      )}
+                      <span>{formatTimeAgo(video.publishedAt)}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section 
@@ -271,22 +376,26 @@ export default function YoutubeContent({ channelData, latestVideos }: Props) {
                       <div 
                         className="absolute inset-0 cursor-pointer"
                         onClick={() => setActiveVideoId(video.id)}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveVideoId(video.id); } }}
+                        aria-label={`Play ${video.title}`}
                       >
                         {video.thumbnail && (
                           <Image 
                             src={video.thumbnail} 
                             alt={video.title}
                             fill
-                            className="object-cover transition-all duration-700 ease-out group-hover:scale-105"
+                            className="object-cover transition-all duration-[2000ms] ease-out group-hover:scale-110 group-hover:translate-x-[2%] group-hover:translate-y-[-1%]"
                             sizes="(max-width: 1024px) 100vw, 33vw"
                             unoptimized={true}
                           />
                         )}
-                        <div className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-transparent" />
+                        <div className="absolute inset-0 bg-primary-dark/10 transition-colors duration-500 group-hover:bg-transparent" />
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                           <div className="relative transition-transform duration-500 ease-out group-hover:scale-110 drop-shadow-2xl flex items-center justify-center">
                             {/* White backing for the play triangle so it isn't transparent */}
-                            <div className="absolute bg-white w-4 h-4 md:w-6 md:h-6 rounded-sm z-0" />
+                            <div className="absolute bg-pure-white w-4 h-4 md:w-6 md:h-6 rounded-sm z-0" />
                             <YouTubeIcon className="w-14 h-14 md:w-16 md:h-16 text-[#FF0000] relative z-10" />
                           </div>
                         </div>

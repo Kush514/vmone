@@ -243,7 +243,7 @@ export default function ReviewIntelligence() {
               className="group flex flex-col lg:flex-row lg:items-start border-t border-muted-light/20 py-8 md:py-16 transition-colors duration-500 hover:bg-pure-white/5 px-4 md:px-8 -mx-4 md:-mx-8 cursor-default"
             >
               <div className="lg:w-5/12 flex items-baseline gap-4 md:gap-8">
-                <span className="font-display text-sm md:text-base font-bold tracking-widest text-muted-dark transition-transform duration-500 group-hover:translate-x-2">
+                <span className="font-display text-sm md:text-base font-bold tracking-widest text-brand-silver transition-transform duration-500 group-hover:translate-x-2">
                   {dim.id}
                 </span>
                 <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-brand-gold transition-transform duration-500 group-hover:translate-x-2">
@@ -255,12 +255,12 @@ export default function ReviewIntelligence() {
                 <p className="font-display text-xl md:text-3xl font-bold text-muted-light group-hover:text-pure-white transition-colors duration-500 leading-tight">
                   {dim.question}
                 </p>
-                <div className="flex flex-wrap items-center gap-3 md:gap-4 text-xs md:text-sm font-medium tracking-widest uppercase text-muted-dark group-hover:text-muted-light transition-colors duration-500">
+                <div className="flex flex-wrap items-center gap-3 md:gap-4 text-xs md:text-sm font-medium tracking-widest uppercase text-brand-silver group-hover:text-muted-light transition-colors duration-500">
                   {dim.focus.map((item, idx) => (
                     <div key={idx} className="flex items-center gap-3 md:gap-4">
                       <span>{item}</span>
                       {idx !== dim.focus.length - 1 && (
-                        <span className="w-1 h-1 rounded-full bg-muted-dark group-hover:bg-muted-light transition-colors duration-500" />
+                        <span className="w-1 h-1 rounded-full bg-brand-silver group-hover:bg-muted-light transition-colors duration-500" />
                       )}
                     </div>
                   ))}
@@ -272,7 +272,7 @@ export default function ReviewIntelligence() {
 
         {/* Key Statement (Climax) */}
         <div className="mt-24 md:mt-32 mb-16 md:mb-24 flex flex-col items-center text-center">
-          <div ref={addToStatementRefs} className="font-display font-bold uppercase tracking-widest text-sm md:text-base text-muted-dark mb-12">
+          <div ref={addToStatementRefs} className="font-display font-bold uppercase tracking-widest text-sm md:text-base text-brand-silver mb-12">
             THE QUESTION ISN&apos;T
           </div>
           <div ref={addToStatementRefs} className="font-display font-bold uppercase leading-[0.95] tracking-tight md:tracking-tighter text-[clamp(2rem,5vw,6rem)] text-muted-light mb-4 md:mb-6">

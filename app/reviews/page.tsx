@@ -16,7 +16,9 @@ export default function ReviewsPage() {
 
       {/* 2. GOLDEN */}
       <div data-theme="golden">
-        <ReviewIntelligence />
+        <div className="">
+          <ReviewIntelligence />
+        </div>
       </div>
 
       {/* 3. DARK */}

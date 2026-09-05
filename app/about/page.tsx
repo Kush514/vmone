@@ -13,7 +13,9 @@ export default function AboutPage() {
     <main className="flex-1">
       {/* 1. GOLDEN */}
       <div data-theme="golden">
-        <AboutVineet />
+        <div className="">
+          <AboutVineet />
+        </div>
         
         {/* (Marquee matches previous section: GOLDEN) */}
         <CinematicMarquee 
@@ -28,7 +30,9 @@ export default function AboutPage() {
 
       {/* 3. GOLDEN */}
       <div data-theme="golden">
-        <WhyVmone />
+        <div className="">
+          <WhyVmone />
+        </div>
       </div>
     </main>
   );

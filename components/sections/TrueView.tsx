@@ -9,6 +9,8 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+import { useGlobalTheme } from '@/components/providers/ThemeProvider';
+
 const stages = [
   { id: '01', title: 'BUY IT', desc: 'Products are experienced as consumers experience them — in the real world.' },
   { id: '02', title: 'TEST IT', desc: 'Performance, usability, features and everyday behavior are put to the test.' },
@@ -18,6 +20,7 @@ const stages = [
 ];
 
 export default function TrueView() {
+  const { theme } = useGlobalTheme();
   const container = useRef<HTMLElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
   const topDividerRef = useRef<HTMLDivElement>(null);
@@ -46,6 +49,7 @@ export default function TrueView() {
   };
 
   useGSAP(() => {
+    if (theme === 'noir_new') return;
     const mm = gsap.matchMedia();
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
@@ -131,18 +135,82 @@ export default function TrueView() {
         y: 0, 
         scaleX: 1, 
         clipPath: 'inset(0% 0% 0% 0%)',
-        color: '#F5F3EE'
       });
     });
 
     return () => mm.revert();
-  }, { scope: container });
+  }, { scope: container, dependencies: [theme] });
+
+  if (theme === 'noir_new') {
+    return (
+      <section 
+        id="true-view"
+        ref={container}
+        className="relative pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden bg-primary-dark"
+      >
+        <div className="container-editorial relative z-10 flex flex-col items-center">
+          
+          {/* Intro Centered */}
+          <div className="mb-8 md:mb-12 flex flex-col items-center text-center">
+            <div className="w-[120px] h-px bg-brand-gold mb-6" />
+            <div className="text-xs md:text-sm font-bold tracking-[0.25em] text-brand-gold uppercase">
+              THE VMONE METHOD
+            </div>
+          </div>
+
+          {/* Main Heading & Copy */}
+          <div className="flex flex-col items-center gap-6 mb-32 md:mb-48 text-center max-w-4xl">
+            <h2 className="font-display font-black uppercase leading-none tracking-tighter text-[clamp(4rem,10vw,12rem)] text-brand-gold">
+              TRUE-VIEW.
+            </h2>
+            <div className="font-display font-bold uppercase tracking-widest text-lg md:text-2xl lg:text-3xl text-brand-silver">
+              REAL PRODUCTS. REAL TESTING. <br className="md:hidden"/>UNCOMFORTABLE TRUTHS.
+            </div>
+          </div>
+
+          {/* Cinematic Storytelling Stages */}
+          <div className="flex flex-col gap-24 md:gap-40 w-full max-w-5xl mx-auto my-16 md:my-32">
+            {stages.map((stage, i) => (
+              <div 
+                key={stage.id} 
+                ref={addToStageRefs}
+                className={`flex flex-col md:flex-row gap-6 md:gap-12 lg:gap-16 items-start md:items-center ${i % 2 !== 0 ? 'md:flex-row-reverse md:text-right' : ''}`}
+              >
+                <div className="font-serif italic font-normal text-6xl md:text-8xl lg:text-[12rem] tracking-tighter text-brand-silver/20 leading-none shrink-0 transition-colors duration-500 group-hover:text-brand-gold/30">
+                  {stage.id}
+                </div>
+                <div className={`flex flex-col gap-4 md:gap-6 mt-4 md:mt-0 ${i % 2 !== 0 ? 'md:items-end' : 'md:items-start'}`}>
+                  <h3 className="font-display font-black uppercase tracking-tight text-3xl md:text-5xl lg:text-6xl text-brand-gold leading-none">
+                    {stage.title}
+                  </h3>
+                  <p className="font-body font-light text-brand-silver text-lg md:text-xl leading-relaxed max-w-md">
+                    {stage.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Signature Statement Climax */}
+          <div className="mt-40 md:mt-64 mb-32 md:mb-48 w-full max-w-5xl text-center flex flex-col items-center border-t border-brand-silver/10 pt-24">
+            <div className="font-display font-bold uppercase leading-[1.1] tracking-widest text-xl md:text-3xl lg:text-4xl text-brand-silver mb-8 md:mb-12">
+              MARKETING TELLS YOU WHAT TO BUY.
+            </div>
+            <div className="font-display font-black uppercase leading-tight tracking-tight text-4xl md:text-6xl lg:text-7xl text-brand-gold">
+              TRUE-VIEW HELPS YOU<br className="hidden md:block"/> DECIDE WHETHER <span className="font-serif italic font-normal normal-case tracking-normal pl-2">You Should.</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section 
       id="true-view"
       ref={container}
-      className="relative pt-24 pb-16 md:pt-40 md:pb-32 overflow-hidden"
+      className="relative pt-24 pb-16 md:pt-40 md:pb-32 overflow-hidden bg-primary-dark"
     >
       {/* Background Typography */}
       <div 

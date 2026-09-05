@@ -24,7 +24,9 @@ export default function Home() {
 
       {/* 2. GOLDEN */}
       <div data-theme="golden">
-        <TrustSection />
+        <div className="">
+          <TrustSection />
+        </div>
 
         {/* (Marquee matches previous section: GOLDEN) */}
         <CinematicMarquee 

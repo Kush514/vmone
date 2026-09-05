@@ -31,6 +31,7 @@ import Header from "@/components/layout/Header";
 import PageTransition from "@/components/layout/PageTransition";
 import SmoothScroll from "@/components/layout/SmoothScroll";
 import Preloader from "@/components/ui/Preloader";
+import ScrollProgress from "@/components/ui/ScrollProgress";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import ThemeSwitcher from "@/components/ui/ThemeSwitcher";
@@ -56,6 +57,7 @@ export default function RootLayout({
             aria-hidden="true"
           />
           
+          <ScrollProgress />
           <Preloader />
           <SmoothScroll>
             <Header />

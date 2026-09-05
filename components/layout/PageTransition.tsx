@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import gsap from 'gsap';
 
@@ -8,44 +8,80 @@ export default function PageTransition({ children }: { children: React.ReactNode
   const router = useRouter();
   const pathname = usePathname();
   const wipeRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const textContainerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+
   
   const prevPathname = useRef(pathname);
   const isTransitioning = useRef(false);
+  const pendingHref = useRef<string | null>(null);
+  const safetyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Force-clear helper — resets everything to a clean state
+  const forceClear = useCallback(() => {
+    if (safetyTimer.current) {
+      clearTimeout(safetyTimer.current);
+      safetyTimer.current = null;
+    }
+    isTransitioning.current = false;
+    pendingHref.current = null;
+    gsap.killTweensOf(bgRef.current);
+    gsap.killTweensOf(textContainerRef.current);
+    if (wipeRef.current) {
+      gsap.set(wipeRef.current, { display: 'none', pointerEvents: 'none' });
+    }
+    if (bgRef.current) {
+      gsap.set(bgRef.current, { scaleY: 0, transformOrigin: 'bottom' });
+    }
+    if (textContainerRef.current) {
+      gsap.set(textContainerRef.current, { opacity: 0 });
+    }
+  }, []);
+
+  // Animate the wipe OUT (reveal the new page)
+  const animateOut = useCallback(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      forceClear();
+      return;
+    }
+
+    // Kill any lingering tweens first
+    gsap.killTweensOf(bgRef.current);
+    gsap.killTweensOf(textContainerRef.current);
+
+    // Shrink from top
+    gsap.set(bgRef.current, { transformOrigin: 'top' });
+
+    const tl = gsap.timeline({
+      onComplete: () => forceClear()
+    });
+
+    tl.to(textContainerRef.current, { opacity: 0, duration: 0.15, ease: 'power2.out' }, 0);
+    tl.to(bgRef.current, { scaleY: 0, duration: 0.5, ease: 'power2.inOut' }, 0.08);
+  }, [forceClear]);
+
+  // Watch for pathname changes to trigger the exit animation
   useEffect(() => {
-    // Check if the route has actually changed
     if (prevPathname.current !== pathname) {
       prevPathname.current = pathname;
       
-      // If we arrived here due to our custom transition, animate out
       if (isTransitioning.current) {
-        const mm = gsap.matchMedia();
-        mm.add('(prefers-reduced-motion: no-preference)', () => {
-          const tl = gsap.timeline({
-            onComplete: () => {
-              isTransitioning.current = false;
-              gsap.set(wipeRef.current, { display: 'none' });
-            }
-          });
-
-          // Wipe moves up to reveal new page
-          tl.to(wipeRef.current, { yPercent: -100, duration: 0.7, ease: 'power3.inOut' });
-        });
-
-        mm.add('(prefers-reduced-motion: reduce)', () => {
-          isTransitioning.current = false;
-          gsap.set(wipeRef.current, { display: 'none' });
-        });
-        
-        return () => mm.revert();
+        // Clear the safety timer since navigation succeeded
+        if (safetyTimer.current) {
+          clearTimeout(safetyTimer.current);
+          safetyTimer.current = null;
+        }
+        animateOut();
       }
     }
-  }, [pathname]);
+  }, [pathname, animateOut]);
 
+  // Global click interceptor
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
-      // Find anchor tag
       const target = (e.target as HTMLElement).closest('a');
       if (!target) return;
 
@@ -66,76 +102,105 @@ export default function PageTransition({ children }: { children: React.ReactNode
         return;
       }
       
-      if (url.pathname === pathname && url.search === window.location.search) {
-        // Same page, ignore
+      // Same page — ignore
+      if (url.pathname === window.location.pathname && url.search === window.location.search) {
         return;
       }
 
-      // Valid internal navigation
       e.preventDefault();
-      // DO NOT stop propagation so React onClick handlers (like menu close) still fire!
       
-      if (isTransitioning.current) return;
+      // If already transitioning, force-clear and restart fresh
+      if (isTransitioning.current) {
+        forceClear();
+      }
+
       isTransitioning.current = true;
-
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
+      pendingHref.current = href;
 
       // Dynamically set transition colors based on target route
       const isDarkRoute = url.pathname === '/' || url.pathname === '/reviews' || url.pathname === '/true-view';
-      const wipeEl = wipeRef.current;
-      const textEl = wipeEl?.querySelector('.transition-text');
+      const wipeBg = bgRef.current;
+      const textEl = wipeRef.current?.querySelector('.transition-text');
       
-      if (wipeEl && textEl) {
+      if (wipeBg && textEl) {
         if (isDarkRoute) {
-          wipeEl.className = "fixed inset-0 z-[9999] bg-brand-gold flex items-center justify-center overflow-hidden border-t border-b border-primary-dark";
+          wipeBg.className = "absolute inset-0 bg-brand-gold border-t border-b border-primary-dark";
           textEl.className = "transition-text font-display font-bold text-primary-dark text-[clamp(6rem,20vw,25rem)] opacity-10 tracking-tighter uppercase whitespace-nowrap drop-shadow-[0_0_50px_rgba(0,0,0,0.3)]";
         } else {
-          wipeEl.className = "fixed inset-0 z-[9999] bg-primary-dark flex items-center justify-center overflow-hidden border-t border-b border-brand-gold";
+          wipeBg.className = "absolute inset-0 bg-primary-dark border-t border-b border-brand-gold";
           textEl.className = "transition-text font-display font-bold text-brand-gold text-[clamp(6rem,20vw,25rem)] opacity-10 tracking-tighter uppercase whitespace-nowrap drop-shadow-[0_0_50px_rgba(224,205,127,0.3)]";
         }
       }
 
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       if (prefersReducedMotion) {
         router.push(href);
-      } else {
-        // Reset wipe to start from bottom
-        gsap.set(wipeRef.current, { display: 'block', yPercent: 100 });
-        
-        const tl = gsap.timeline({
-          onComplete: () => {
-            // Push route after wipe covers screen
-            router.push(href);
-            
-            // Safety fallback: if route doesn't change within 2s, force clear
-            setTimeout(() => {
-              if (isTransitioning.current) {
-                isTransitioning.current = false;
-                gsap.set(wipeRef.current, { display: 'none' });
-              }
-            }, 2000);
-          }
-        });
-
-        // Wipe comes up from bottom
-        tl.to(wipeRef.current, { yPercent: 0, duration: 0.7, ease: 'power3.inOut' });
+        return;
       }
+
+      // Kill any lingering tweens
+      gsap.killTweensOf(bgRef.current);
+      gsap.killTweensOf(textContainerRef.current);
+
+      // Setup
+      gsap.set(wipeRef.current, { display: 'flex', pointerEvents: 'auto' });
+      gsap.set(bgRef.current, { transformOrigin: 'bottom', scaleY: 0 });
+      gsap.set(textContainerRef.current, { opacity: 0 });
+
+      const tl = gsap.timeline({
+        onStart: () => {
+          gsap.set(textContainerRef.current, { opacity: 1 });
+        },
+        onComplete: () => {
+          // Navigate
+          if (pendingHref.current) {
+            router.push(pendingHref.current);
+          }
+
+          // Safety fallback: if pathname hasn't changed within 3s, force-clear
+          safetyTimer.current = setTimeout(() => {
+            if (isTransitioning.current) {
+              forceClear();
+            }
+          }, 3000);
+        }
+      });
+
+      // Stretch curtain up from bottom
+      tl.to(bgRef.current, { scaleY: 1, duration: 0.46, ease: 'power2.inOut' }, 0);
     };
 
     document.addEventListener('click', handleGlobalClick, { capture: true });
     return () => document.removeEventListener('click', handleGlobalClick, { capture: true });
-  }, [pathname, router]);
+  }, [router, forceClear, animateOut]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (safetyTimer.current) clearTimeout(safetyTimer.current);
+      gsap.killTweensOf(bgRef.current);
+      gsap.killTweensOf(textContainerRef.current);
+    };
+  }, []);
 
   return (
     <>
       <div 
         ref={wipeRef} 
-        className="fixed inset-0 z-[9999] bg-primary-dark flex items-center justify-center overflow-hidden border-t border-b border-brand-gold" 
-        style={{ display: 'none', transform: 'translateY(100%)' }} 
+        className="fixed inset-0 z-[9999] pointer-events-none flex items-start justify-start overflow-hidden" 
+        style={{ display: 'none' }} 
         aria-hidden="true"
       >
-        <div className="transition-text font-display font-bold text-brand-gold text-[clamp(6rem,20vw,25rem)] opacity-10 tracking-tighter uppercase whitespace-nowrap drop-shadow-[0_0_50px_rgba(224,205,127,0.3)]">
-          VMONE
+        <div 
+          ref={bgRef} 
+          className="absolute inset-0 bg-primary-dark border-t border-b border-brand-gold" 
+          style={{ transformOrigin: 'bottom', transform: 'scaleY(0)' }} 
+        />
+        <div ref={textContainerRef} className="relative z-10 opacity-0">
+          <div className="transition-text font-display font-bold text-brand-gold text-[clamp(6rem,20vw,25rem)] opacity-10 tracking-tighter uppercase whitespace-nowrap drop-shadow-[0_0_50px_rgba(224,205,127,0.3)]">
+            VMONE
+          </div>
         </div>
       </div>
       <div ref={contentRef} className="flex-1 flex flex-col origin-top" style={{ opacity: 1, transform: 'none' }}>

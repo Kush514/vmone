@@ -130,7 +130,7 @@ export default function Preloader() {
       
       {/* Background massive watermark */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full overflow-hidden opacity-5 pointer-events-none select-none flex justify-center">
-        <h2 className="font-display font-bold uppercase text-[clamp(15rem,35vw,40rem)] leading-none tracking-tighter text-brand-gold whitespace-nowrap">
+        <h2 aria-hidden="true" className="font-display font-bold uppercase text-[clamp(15rem,35vw,40rem)] leading-none tracking-tighter text-brand-gold whitespace-nowrap">
           VMONE
         </h2>
       </div>

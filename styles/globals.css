@@ -133,7 +133,29 @@
    GLOBAL THEME OVERRIDES
    ========================================= */
 
-/* 1. CURRENT (NOIR) - Default Theme is already defined in @theme block */
+/* 1. CURRENT (NOIR) - Default Theme is already defined in @theme block (Noir Old) */
+
+/* 1.5 NOIR NEW */
+[data-global-theme="noir_new"] {
+  --color-primary-dark: #0A0A0A;
+  --color-secondary-dark: #171717;
+  --color-brand-gold: #B8924A;
+  --color-pure-white: #F5F3EE;
+  --color-brand-silver: #C0B283;
+  --color-muted-light: #9C9A96;
+  --color-muted-dark: #202020;
+}
+/* Noir New Alternating */
+[data-global-theme="noir_new"] [data-theme="golden"],
+[data-theme="golden"][data-global-theme="noir_new"] {
+  --color-primary-dark: #B8924A;
+  --color-secondary-dark: #A48141;
+  --color-brand-gold: #0A0A0A;
+  --color-pure-white: #0A0A0A;
+  --color-brand-silver: #202020;
+  --color-muted-light: #303030;
+  --color-muted-dark: #C0B283;
+}
 
 /* 2. PRINT MAGAZINE */
 [data-global-theme="print"] {

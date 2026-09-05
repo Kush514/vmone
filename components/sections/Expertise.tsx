@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { useGlobalTheme } from '@/components/providers/ThemeProvider';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -23,13 +24,14 @@ const categories = [
 ];
 
 export default function Expertise() {
+  const { theme } = useGlobalTheme();
   const container = useRef<HTMLElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
   const topDividerRef = useRef<HTMLDivElement>(null);
   const headingRefs = useRef<HTMLSpanElement[]>([]);
   const copyRef = useRef<HTMLParagraphElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  const rowRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const rowRefs = useRef<(HTMLElement | null)[]>([]);
   const bottomDividerRef = useRef<HTMLDivElement>(null);
   const footerTextRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLDivElement>(null);
@@ -41,6 +43,8 @@ export default function Expertise() {
   };
 
   useGSAP(() => {
+    if (theme === 'noir_new') return;
+
     const mm = gsap.matchMedia();
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
@@ -64,34 +68,37 @@ export default function Expertise() {
              .to(copyRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, "-=0.6");
 
       // 3. Staggered Row reveals
-      gsap.set(rowRefs.current, { opacity: 0, y: 30 });
-      
-      gsap.to(rowRefs.current, {
-        scrollTrigger: {
-          trigger: listRef.current,
-          start: "top 80%",
-        },
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out'
-      });
+      if (listRef.current) {
+        gsap.set(rowRefs.current, { opacity: 0, y: 30 });
+        
+        gsap.to(rowRefs.current, {
+          scrollTrigger: {
+            trigger: listRef.current,
+            start: "top 80%",
+          },
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: 'power3.out'
+        });
+      }
 
       // 4. Ending Elements
-      gsap.set(bottomDividerRef.current, { scaleX: 0, transformOrigin: 'left center' });
-      gsap.set([footerTextRef.current, taglineRef.current], { opacity: 0, y: 10 });
+      if (bottomDividerRef.current) {
+        gsap.set(bottomDividerRef.current, { scaleX: 0, transformOrigin: 'left center' });
+        gsap.set([footerTextRef.current, taglineRef.current], { opacity: 0, y: 10 });
 
-      const endTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: bottomDividerRef.current,
-          start: "top 95%",
-        }
-      });
+        const endTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: bottomDividerRef.current,
+            start: "top 95%",
+          }
+        });
 
-      endTl.to(bottomDividerRef.current, { scaleX: 1, duration: 1, ease: 'power3.out' })
-           .to([taglineRef.current, footerTextRef.current], { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' }, "-=0.6");
-
+        endTl.to(bottomDividerRef.current, { scaleX: 1, duration: 1, ease: 'power3.out' })
+             .to([taglineRef.current, footerTextRef.current], { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' }, "-=0.6");
+      }
     });
 
     // Reduced motion fallback
@@ -109,7 +116,59 @@ export default function Expertise() {
     });
 
     return () => mm.revert();
-  }, { scope: container });
+  }, { scope: container, dependencies: [theme] });
+
+  if (theme === 'noir_new') {
+    return (
+      <section 
+        id="expertise"
+        ref={container}
+        className="relative bg-primary-dark pt-24 pb-16 md:pt-32 md:pb-32 overflow-hidden px-4 md:px-16 lg:px-24 text-pure-white"
+      >
+        <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center">
+          
+          <div className="w-[120px] h-px bg-brand-gold mb-6 md:mb-12" />
+          
+          <div className="flex flex-col items-center text-center gap-6 mb-16 md:mb-24">
+            <div className="text-xs md:text-sm font-bold tracking-[0.2em] text-brand-gold uppercase">
+              WHAT VMONE COVERS
+            </div>
+            
+            <h2 className="font-display font-black uppercase leading-[0.9] tracking-tighter text-[clamp(4rem,9vw,9rem)] text-brand-gold">
+              TECHNOLOGY FOR<br />REAL HOMES.
+            </h2>
+          </div>
+
+          <div className="flex flex-col w-full border-t-2 border-brand-silver/20">
+            {categories.map((category, index) => (
+              <div 
+                key={category.id}
+                ref={(el) => { if (el) rowRefs.current[index] = el; }}
+                className="group flex flex-col md:flex-row md:items-center justify-start md:gap-12 lg:gap-24 border-b border-brand-silver/10 py-8 md:py-12 transition-colors duration-500 hover:bg-pure-white/5 px-4 cursor-pointer"
+              >
+                <span className="font-display text-sm md:text-xl font-bold tracking-widest text-brand-silver/50 mb-2 md:mb-0 transition-colors duration-500 group-hover:text-brand-gold">
+                  {category.id}
+                </span>
+                
+                <h3 className="font-display text-2xl md:text-4xl lg:text-5xl font-black uppercase tracking-tight text-brand-gold">
+                  {category.title}
+                </h3>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-24 md:mt-32 w-full flex flex-col items-center">
+            <div className="w-8 h-8 mb-8 border border-brand-gold flex items-center justify-center rounded-sm">
+              <div className="w-2 h-2 bg-brand-gold rounded-full" />
+            </div>
+            <div className="font-display font-bold uppercase tracking-widest text-lg md:text-xl lg:text-2xl text-brand-silver text-center">
+              REAL PRODUCTS. PRACTICAL TESTING. CLEARER DECISIONS.
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section 

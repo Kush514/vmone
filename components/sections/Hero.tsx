@@ -6,7 +6,10 @@ import { useGSAP } from '@gsap/react';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
+import { useGlobalTheme } from '@/components/providers/ThemeProvider';
+
 export default function Hero() {
+  const { theme } = useGlobalTheme();
   const container = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
@@ -16,8 +19,13 @@ export default function Hero() {
   const copyRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const signatureRef = useRef<HTMLDivElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const bottomBarRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    if (theme === 'noir_new') return;
+
     const mm = gsap.matchMedia();
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
@@ -39,15 +47,17 @@ export default function Hero() {
         const y = (e.clientY / window.innerHeight - 0.5) * 2;
 
         gsap.to(bgRef.current, {
-          x: x * -10,
-          y: y * -10,
+          x: x * -20,
+          y: y * -20,
           duration: 2,
           ease: 'power2.out'
         });
       };
 
-      window.addEventListener('mousemove', handleMouseMove);
-      return () => window.removeEventListener('mousemove', handleMouseMove);
+      if (window.matchMedia('(min-width: 1024px)').matches) {
+        document.addEventListener('mousemove', handleMouseMove);
+        return () => document.removeEventListener('mousemove', handleMouseMove);
+      }
     });
 
     // Reduced motion fallback
@@ -59,8 +69,72 @@ export default function Hero() {
     });
 
     return () => mm.revert();
-  }, { scope: container });
+  }, { scope: container, dependencies: [theme] });
 
+  // NOIR NEW THEME LAYOUT
+  if (theme === 'noir_new') {
+    return (
+      <section 
+        ref={container}
+        className="relative min-h-[100svh] flex flex-col justify-center overflow-hidden bg-primary-dark pt-24 pb-8 md:pt-32 px-6 md:px-16 lg:px-24"
+        aria-label="Introduction"
+      >
+        <div className="relative z-10 w-full flex flex-col items-center justify-center flex-grow mt-[-10vh]">
+          <h1 className="flex flex-col w-full font-display font-black uppercase leading-[0.9] tracking-tight text-brand-gold text-[clamp(4rem,10vw,12rem)]">
+            <span className="block overflow-hidden pb-2 text-left">
+              <span ref={line1Ref} className="block origin-bottom">
+                TECHNOLOGY.
+              </span>
+            </span>
+            <span className="block overflow-hidden pb-2 text-right md:pr-[15%]">
+              <span ref={line2Ref} className="block origin-bottom">
+                WITHOUT
+              </span>
+            </span>
+            <span className="block overflow-hidden pb-2 text-right md:pr-[15%]">
+              <span ref={line3Ref} className="block origin-bottom">
+                THE NOISE.
+              </span>
+            </span>
+          </h1>
+        </div>
+
+        <div className="relative z-10 w-full flex flex-col md:flex-row justify-between items-end gap-12 mt-auto pb-12">
+          {/* Signature / Hosted By (Bottom Left) */}
+          <div ref={signatureRef} className="flex flex-col gap-2 order-2 md:order-1">
+            <span className="text-[10px] md:text-xs font-bold tracking-[0.25em] text-brand-silver uppercase">
+              HOSTED BY
+            </span>
+            <span className="text-sm md:text-lg font-display font-black tracking-widest text-pure-white uppercase">
+              VINEET MALHOTRA
+            </span>
+          </div>
+
+          {/* Copy and CTA (Bottom Right) */}
+          <div className="flex flex-col items-end gap-6 md:max-w-[400px] text-right order-1 md:order-2">
+            <p 
+              ref={copyRef}
+              className="text-base md:text-lg font-body font-light text-brand-silver leading-relaxed"
+            >
+              Curated insights and uncompromising critiques for the modern aficionado.
+            </p>
+            
+            <div ref={ctaRef}>
+              <Link 
+                href="/reviews"
+                className="group relative flex items-center gap-3 text-brand-gold font-display font-bold tracking-[0.15em] uppercase pb-2 border-b-2 border-brand-gold/50 hover:border-brand-gold transition-colors focus:outline-none"
+              >
+                <span className="relative z-10">WATCH REVIEWS</span>
+                <ArrowRight size={20} className="relative z-10 group-hover:translate-x-2 transition-transform duration-500" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // DEFAULT (OLD) LAYOUT
   return (
     <section 
       ref={container}

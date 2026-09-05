@@ -5,12 +5,14 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { useGlobalTheme } from '@/components/providers/ThemeProvider';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 export default function AboutVineet() {
+  const { theme } = useGlobalTheme();
   const container = useRef<HTMLDivElement>(null);
   
   // Animation Refs
@@ -42,6 +44,8 @@ export default function AboutVineet() {
   }
 
   useGSAP(() => {
+    if (theme === 'noir_new') return;
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container.current,
@@ -124,18 +128,105 @@ export default function AboutVineet() {
     );
 
     // Parallax effect for the image on scroll
-    gsap.to(imageRef.current, {
-      yPercent: 15,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: imageContainerRef.current,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true,
-      }
-    });
+    if (imageContainerRef.current) {
+      gsap.to(imageRef.current, {
+        yPercent: 15,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: imageContainerRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        }
+      });
+    }
 
-  }, { scope: container });
+  }, { scope: container, dependencies: [theme] });
+
+  if (theme === 'noir_new') {
+    return (
+      <section 
+        id="about"
+        ref={container}
+        className="relative bg-primary-dark text-pure-white pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden px-4 md:px-16 lg:px-24"
+      >
+        <div className="relative z-10 w-full max-w-7xl mx-auto">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            
+            {/* Left Column: Heading & Image */}
+            <div className="lg:col-span-5 flex flex-col gap-8 md:gap-12">
+              <h2 className="font-display font-black uppercase leading-[0.9] tracking-tighter text-[clamp(3rem,5vw,6rem)] text-brand-gold">
+                <span className="block overflow-hidden pb-2">VINEET</span>
+                <span className="block overflow-hidden pb-2">MALHOTRA</span>
+              </h2>
+              
+              <div ref={imageContainerRef} className="relative w-full aspect-[4/5] overflow-hidden rounded-sm border border-brand-silver/10">
+                <Image 
+                  ref={imageRef}
+                  src="/vineet.webp"
+                  alt="Vineet Malhotra"
+                  fill
+                  className="object-cover object-[center_8%] transition-transform duration-[3s] ease-out hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  quality={100}
+                />
+              </div>
+            </div>
+
+            {/* Right Column: Copy & Experience */}
+            <div className="lg:col-span-7 flex flex-col gap-12 lg:pt-4">
+              
+              <div className="flex flex-col gap-8">
+                <p className="text-lg md:text-xl font-body font-light text-brand-silver leading-relaxed">
+                  <span className="float-left font-display font-black text-6xl md:text-7xl leading-[0.8] pr-4 pt-2 text-brand-gold">V</span>ineet Malhotra is a leading consumer technology expert with an uncompromising critical eye for detail, design, and performance. With over a decade of dedicated experience dissecting the complexities of modern appliances, he founded VMONE to elevate the standard of product evaluation. His approach transcends basic specifications, focusing deeply on how engineering decisions impact daily human experience.
+                </p>
+                <p className="text-lg md:text-xl font-body font-light text-brand-silver leading-relaxed">
+                  Through meticulous testing protocols and a commitment to absolute transparency, Vineet has built a platform that demystifies technology. He believes that true luxury in consumer goods is defined not just by price, but by flawless execution, reliability, and intuitive design.
+                </p>
+              </div>
+              
+              <div className="w-full h-px bg-brand-silver/20 my-4" />
+
+              <div className="relative py-4 pl-6 border-l-4 border-brand-gold">
+                <p className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-pure-white leading-tight">
+                  "Technology should be<br className="hidden md:block"/> easy to understand."
+                </p>
+              </div>
+
+              <div className="w-full h-px bg-brand-silver/20 my-4" />
+
+              <div className="flex items-center gap-6 md:gap-8 pt-4">
+                <div className="font-display font-black text-6xl md:text-8xl tracking-tighter text-brand-gold leading-none">
+                  {yearsOfExperience}+
+                </div>
+                <div className="flex flex-col justify-center text-sm md:text-base font-bold tracking-[0.25em] uppercase text-brand-silver">
+                  <span>YEARS</span>
+                  <span>TESTING</span>
+                  <span>APPLIANCES</span>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          {/* Bottom Marquee */}
+          <div className="mt-24 md:mt-32 w-full pt-8 border-t border-brand-silver/20">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-6 text-[10px] md:text-xs font-bold tracking-[0.3em] text-brand-silver uppercase w-full">
+              <span>VINEET MALHOTRA</span>
+              <span className="text-brand-gold hidden md:block">•</span>
+              <span>FOUNDER</span>
+              <span className="text-brand-gold hidden md:block">•</span>
+              <span>VMONE</span>
+              <span className="text-brand-gold hidden md:block">•</span>
+              <span>DELHI, NCR</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section 
@@ -158,7 +249,7 @@ export default function AboutVineet() {
           
           {/* Left Column: Heading & Image */}
           <div className="lg:col-span-6 flex flex-col gap-12 md:gap-16">
-            <h2 ref={mainTextRef} className="font-display font-bold uppercase leading-[0.9] tracking-tighter text-[clamp(3.5rem,8vw,10rem)]">
+            <h2 ref={mainTextRef} className="font-display font-bold uppercase leading-[0.9] tracking-tighter text-[clamp(3.5rem,6vw,8rem)]">
               <span className="block overflow-hidden pb-1">VINEET</span>
               <span className="block overflow-hidden pb-1">MALHOTRA</span>
             </h2>
@@ -183,7 +274,7 @@ export default function AboutVineet() {
             
             <div className="flex flex-col gap-8 md:gap-10">
               <p ref={introRef} className="text-lg md:text-xl font-body font-light text-muted-light leading-relaxed">
-                <span className="float-left font-serif text-6xl md:text-7xl leading-[0.85] pr-3 pt-2 text-brand-gold font-normal">V</span>ineet Malhotra is a consumer technology expert and the founder of VMONE. For more than a decade, he has tested and analysed technology and home appliances to make complicated buying decisions simpler.
+                <span className="font-serif font-bold text-brand-gold">Vineet Malhotra</span> is a consumer technology expert and the founder of VMONE. For more than a decade, he has tested and analysed technology and home appliances to make complicated buying decisions simpler.
               </p>
               
               <div ref={highlightRef} className="relative pt-6 pb-2 md:pl-4">
@@ -227,7 +318,7 @@ export default function AboutVineet() {
 
         {/* Section Footer / Divider */}
         <div className="mt-16 md:mt-24">
-          <div ref={bottomDividerRef} className="w-full h-px bg-pure-white/10/30 mb-8" />
+          <div ref={bottomDividerRef} className="w-full h-px bg-pure-white/10 mb-8" />
           <div ref={metadataRef} className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs font-medium tracking-[0.2em] text-muted-light uppercase">
             <div className="flex flex-col sm:flex-row gap-1 sm:gap-4">
               <span className="text-brand-gold">VINEET MALHOTRA</span>

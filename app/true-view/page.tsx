@@ -58,7 +58,7 @@ export default function TrueViewPage() {
 
       {/* 2. GOLDEN */}
       <section data-theme="golden" className="bg-primary-dark transition-colors duration-500">
-        <div className="container-editorial py-16 md:py-24">
+        <div className="container-editorial py-16 md:py-24 ">
           <div className="flex flex-col gap-16 md:gap-24 max-w-5xl mx-auto md:ml-[10%]">
             <div className="text-sm font-medium tracking-[0.2em] text-muted-light uppercase mb-8 md:mb-16 transition-colors duration-500">
               THE PROCESS

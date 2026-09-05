@@ -51,7 +51,7 @@ export default function CinematicMarquee({
       let scrollTimeout: NodeJS.Timeout;
       const onScroll = () => {
         if (tweenRef.current) {
-          gsap.to(tweenRef.current, { timeScale: direction === 'left' ? 2 : 2, duration: 0.2, overwrite: true });
+          gsap.to(tweenRef.current, { timeScale: 2, duration: 0.2, overwrite: true });
           clearTimeout(scrollTimeout);
           scrollTimeout = setTimeout(() => {
             if (tweenRef.current) {

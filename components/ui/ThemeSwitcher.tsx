@@ -9,7 +9,8 @@ export default function ThemeSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
 
   const themes = [
-    { id: "noir", name: "Noir (Default)", bg: "#000000", alt: "#E0CD7F" },
+    { id: "noir", name: "Noir Old", bg: "#000000", alt: "#E0CD7F" },
+    { id: "noir_new", name: "Noir New", bg: "#0A0A0A", alt: "#B8924A" },
     { id: "print", name: "Print Magazine", bg: "#FFFFFF", alt: "#FDFBF7" },
     { id: "stone", name: "Stone Studio", bg: "#F9F9F6", alt: "#EBEBE8" },
     { id: "minimalist", name: "The Minimalist", bg: "#FAFAFA", alt: "#EEEEEE" },
@@ -33,7 +34,7 @@ export default function ThemeSwitcher() {
               key={t.id}
               onClick={() => setTheme(t.id)}
               className={`flex items-center gap-3 w-full text-left p-2 transition-colors duration-300 ${
-                theme === t.id ? "bg-brand-gold text-pure-white" : "hover:bg-brand-silver/10 text-brand-silver hover:text-pure-white"
+                theme === t.id ? "bg-brand-gold text-primary-dark" : "hover:bg-brand-silver/10 text-brand-silver hover:text-pure-white"
               }`}
             >
               <div className="flex w-6 h-6 border border-brand-silver/30 shadow-sm overflow-hidden">
@@ -50,6 +51,8 @@ export default function ThemeSwitcher() {
         onClick={() => setIsOpen(!isOpen)}
         className="w-12 h-12 bg-primary-dark border border-brand-silver/30 shadow-xl flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-primary-dark hover:border-brand-gold transition-all duration-300 group"
         aria-label="Toggle Theme Switcher"
+        aria-expanded={isOpen}
+        aria-haspopup="true"
       >
         {isOpen ? (
           <X className="w-5 h-5 group-hover:scale-110 transition-transform" />

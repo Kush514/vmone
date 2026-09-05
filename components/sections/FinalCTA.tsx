@@ -4,8 +4,10 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ArrowRight } from 'lucide-react';
+import { useGlobalTheme } from '@/components/providers/ThemeProvider';
 
 export default function FinalCTA() {
+  const { theme } = useGlobalTheme();
   const container = useRef<HTMLElement>(null);
   const bgTextRef = useRef<HTMLDivElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
@@ -27,6 +29,8 @@ export default function FinalCTA() {
   };
 
   useGSAP(() => {
+    if (theme === 'noir_new') return;
+
     const mm = gsap.matchMedia();
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
@@ -75,7 +79,77 @@ export default function FinalCTA() {
     });
 
     return () => mm.revert();
-  }, { scope: container });
+  }, { scope: container, dependencies: [theme] });
+
+  if (theme === 'noir_new') {
+    return (
+      <section 
+        id="final-cta"
+        ref={container}
+        className="relative pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden bg-primary-dark text-pure-white px-4 md:px-16 lg:px-24"
+      >
+        <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-start border-t border-brand-silver/20 pt-16 md:pt-24">
+          
+          <div className="text-xs md:text-sm font-bold tracking-[0.2em] text-brand-gold uppercase mb-6 md:mb-12">
+            GET IN TOUCH
+          </div>
+
+          <h2 className="font-display font-black uppercase leading-[0.9] tracking-tighter text-[clamp(4rem,12vw,12rem)] text-brand-gold mb-16 md:mb-32">
+            LET'S TALK.
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8 w-full">
+            <div className="flex flex-col items-start gap-12">
+              <p className="text-lg md:text-2xl font-body font-light text-brand-silver leading-relaxed max-w-md">
+                For business inquiries, collaborations, and media requests, please reach out via email.
+              </p>
+              
+              <a 
+                href="mailto:VINEET@VMONE.IN" 
+                className="font-display font-black text-2xl md:text-4xl tracking-widest text-brand-gold hover:text-pure-white transition-colors duration-300 border-b-2 border-brand-gold/20 pb-2 hover:border-brand-gold"
+              >
+                VINEET@VMONE.IN
+              </a>
+
+              <div className="flex flex-col items-start gap-4 mt-8 md:mt-16">
+                <div className="text-xs font-bold tracking-[0.2em] text-brand-silver/50 uppercase mb-4">
+                  SOCIAL LINKS
+                </div>
+                {['YOUTUBE', 'INSTAGRAM', 'TWITTER', 'FACEBOOK'].map(s => (
+                  <a key={s} href="#" className="font-display font-bold text-lg tracking-widest text-brand-gold hover:text-pure-white transition-colors uppercase">
+                    {s}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col w-full max-w-lg items-end justify-end md:ml-auto">
+              <div className="w-full h-px bg-brand-silver/20 mb-8" />
+              <div className="text-xs md:text-sm font-medium tracking-[0.2em] text-brand-silver uppercase mb-2 text-right w-full">
+                DELHI, NCR
+              </div>
+              <div className="text-xs md:text-sm font-medium tracking-[0.2em] text-brand-silver/50 uppercase text-right w-full mb-16">
+                VMONE HEADQUARTERS
+              </div>
+              
+              <a 
+                href="https://www.youtube.com/@VMone" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group relative flex items-center justify-between w-full p-6 border border-brand-gold bg-primary-dark text-brand-gold hover:bg-brand-gold hover:text-primary-dark transition-all duration-500 rounded-sm"
+              >
+                <span className="font-display font-bold text-lg md:text-xl uppercase tracking-widest">
+                  SUBSCRIBE NOW
+                </span>
+                <ArrowRight className="w-6 h-6 transition-transform duration-500 group-hover:translate-x-2" />
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section 

@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "noir" | "print" | "stone" | "minimalist" | "heritage" | "gallery" | "brutalism" | "midnight" | "analog";
+type Theme = "noir" | "noir_new" | "print" | "stone" | "minimalist" | "heritage" | "gallery" | "brutalism" | "midnight" | "analog";
 
 interface ThemeContextType {
   theme: Theme;
