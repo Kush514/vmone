@@ -8,8 +8,10 @@ import { useGlobalTheme } from '@/components/providers/ThemeProvider';
 
 const socials = [
   { name: 'YOUTUBE', url: 'https://www.youtube.com/@VMone' },
-  { name: 'INSTAGRAM', url: 'https://www.instagram.com/vmone.in' },
-  { name: 'TWITTER', url: 'https://twitter.com/vmone' },
+  { name: 'FACEBOOK', url: 'https://www.facebook.com/vmone1' },
+  { name: 'X', url: 'https://x.com/vm__one' },
+  { name: 'TELEGRAM', url: 'https://t.me/VM_ONE1' },
+  { name: 'INSTAGRAM', url: 'https://www.instagram.com/vm__one' },
 ];
 
 export default function Footer() {
@@ -143,7 +145,7 @@ export default function Footer() {
         
         <div className="flex flex-col md:flex-row justify-between items-center gap-12 md:gap-8 mb-16 md:mb-24">
           {/* Socials */}
-          <div className="flex flex-wrap justify-center md:justify-start gap-x-8 gap-y-6 md:gap-12">
+          <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-4 md:gap-6">
             {socials.map((social) => (
               <a 
                 key={social.name}

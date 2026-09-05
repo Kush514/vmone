@@ -115,9 +115,15 @@ export default function FinalCTA() {
                 <div className="text-xs font-bold tracking-[0.2em] text-brand-silver/50 uppercase mb-4">
                   SOCIAL LINKS
                 </div>
-                {['YOUTUBE', 'INSTAGRAM', 'TWITTER', 'FACEBOOK'].map(s => (
-                  <a key={s} href="#" className="font-display font-bold text-lg tracking-widest text-brand-gold hover:text-pure-white transition-colors uppercase">
-                    {s}
+                {[
+                  { name: 'YOUTUBE', url: 'https://www.youtube.com/@VMone' },
+                  { name: 'FACEBOOK', url: 'https://www.facebook.com/vmone1' },
+                  { name: 'X', url: 'https://x.com/vm__one' },
+                  { name: 'TELEGRAM', url: 'https://t.me/VM_ONE1' },
+                  { name: 'INSTAGRAM', url: 'https://www.instagram.com/vm__one' }
+                ].map(s => (
+                  <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className="font-display font-bold text-lg tracking-widest text-brand-gold hover:text-pure-white transition-colors uppercase">
+                    {s.name}
                   </a>
                 ))}
               </div>

@@ -23,10 +23,10 @@ const navLinks = [
 
 const socials = [
   { name: 'YOUTUBE', url: 'https://www.youtube.com/@VMone' },
-  { name: 'INSTAGRAM', url: 'https://www.instagram.com/vm__one/' },
-  { name: 'X', url: 'https://x.com/vm__one' },
   { name: 'FACEBOOK', url: 'https://www.facebook.com/vmone1' },
+  { name: 'X', url: 'https://x.com/vm__one' },
   { name: 'TELEGRAM', url: 'https://t.me/VM_ONE1' },
+  { name: 'INSTAGRAM', url: 'https://www.instagram.com/vm__one' },
 ];
 
 export default function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
