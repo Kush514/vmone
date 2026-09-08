@@ -8,6 +8,7 @@ import { useGSAP } from '@gsap/react';
 import { ArrowRight } from 'lucide-react';
 import { formatCompactNumber, formatTimeAgo, YouTubeChannel, YouTubeVideo } from '@/lib/youtube';
 import { useGlobalTheme } from '@/components/providers/ThemeProvider';
+import SubscribeButton from '@/components/ui/SubscribeButton';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -168,29 +169,32 @@ export default function YoutubeContent({ channelData, latestVideos }: Props) {
               </h2>
             </div>
 
-            {/* Right: Stats */}
-            {channelData && (
-              <div ref={statsContainerRef} className="flex gap-8 md:gap-12">
-                <div ref={addToStatRefs} className="flex flex-col gap-1 text-right md:text-left">
-                  <div className="stat-counter font-display font-bold text-2xl md:text-4xl tracking-tighter text-brand-gold" data-target={channelData.subscriberCount}>
-                    {formatCompactNumber(channelData.subscriberCount)}
+            {/* Right: Stats & CTA */}
+            <div className="flex flex-col md:items-end gap-8">
+              {channelData && (
+                <div ref={statsContainerRef} className="flex gap-8 md:gap-12">
+                  <div ref={addToStatRefs} className="flex flex-col gap-1 text-right md:text-left">
+                    <div className="stat-counter font-display font-bold text-2xl md:text-4xl tracking-tighter text-brand-gold" data-target={channelData.subscriberCount}>
+                      {formatCompactNumber(channelData.subscriberCount)}
+                    </div>
+                    <div className="text-[10px] md:text-xs font-bold tracking-widest text-brand-silver uppercase">SUBSCRIBERS</div>
                   </div>
-                  <div className="text-[10px] md:text-xs font-bold tracking-widest text-brand-silver uppercase">SUBSCRIBERS</div>
-                </div>
-                <div ref={addToStatRefs} className="flex flex-col gap-1 text-right md:text-left">
-                  <div className="stat-counter font-display font-bold text-2xl md:text-4xl tracking-tighter text-brand-gold" data-target={channelData.viewCount}>
-                    {formatCompactNumber(channelData.viewCount)}
+                  <div ref={addToStatRefs} className="flex flex-col gap-1 text-right md:text-left">
+                    <div className="stat-counter font-display font-bold text-2xl md:text-4xl tracking-tighter text-brand-gold" data-target={channelData.viewCount}>
+                      {formatCompactNumber(channelData.viewCount)}
+                    </div>
+                    <div className="text-[10px] md:text-xs font-bold tracking-widest text-brand-silver uppercase">TOTAL VIEWS</div>
                   </div>
-                  <div className="text-[10px] md:text-xs font-bold tracking-widest text-brand-silver uppercase">TOTAL VIEWS</div>
-                </div>
-                <div ref={addToStatRefs} className="flex flex-col gap-1 text-right md:text-left">
-                  <div className="stat-counter font-display font-bold text-2xl md:text-4xl tracking-tighter text-brand-gold" data-target={channelData.videoCount}>
-                    {formatCompactNumber(channelData.videoCount)}
+                  <div ref={addToStatRefs} className="flex flex-col gap-1 text-right md:text-left">
+                    <div className="stat-counter font-display font-bold text-2xl md:text-4xl tracking-tighter text-brand-gold" data-target={channelData.videoCount}>
+                      {formatCompactNumber(channelData.videoCount)}
+                    </div>
+                    <div className="text-[10px] md:text-xs font-bold tracking-widest text-brand-silver uppercase">VIDEOS</div>
                   </div>
-                  <div className="text-[10px] md:text-xs font-bold tracking-widest text-brand-silver uppercase">VIDEOS</div>
                 </div>
-              </div>
-            )}
+              )}
+              <SubscribeButton variant="solid" />
+            </div>
           </div>
 
           {/* Videos Grid - 2 columns */}
@@ -292,16 +296,7 @@ export default function YoutubeContent({ channelData, latestVideos }: Props) {
               Watch Vineet Malhotra test, compare and explain the technology people actually bring into their homes.
             </p>
             
-            <a 
-              href="https://www.youtube.com/@VMone" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="group relative overflow-hidden flex items-center justify-center px-8 py-4 border border-brand-gold bg-primary-dark text-brand-gold font-medium tracking-[0.15em] uppercase hover:border-brand-gold transition-colors duration-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-primary-dark rounded-sm"
-            >
-              <div className="absolute inset-0 bg-brand-gold origin-left scale-x-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-x-100" />
-              <span className="relative z-10 transition-colors duration-500 group-hover:text-primary-dark">WATCH VMONE ON YOUTUBE</span>
-              <ArrowRight className="w-4 h-4 ml-3 relative z-10 transition-all duration-500 group-hover:translate-x-1 group-hover:text-primary-dark" />
-            </a>
+            <SubscribeButton variant="solid" className="w-full" />
           </div>
         </div>
 

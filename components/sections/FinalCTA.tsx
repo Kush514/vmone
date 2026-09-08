@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ArrowRight } from 'lucide-react';
 import { useGlobalTheme } from '@/components/providers/ThemeProvider';
+import SubscribeButton from '@/components/ui/SubscribeButton';
 
 export default function FinalCTA() {
   const { theme } = useGlobalTheme();
@@ -14,7 +15,7 @@ export default function FinalCTA() {
   const headingRefs = useRef<HTMLSpanElement[]>([]);
   const subHeadingRef = useRef<HTMLDivElement>(null);
   const copyRef = useRef<HTMLParagraphElement>(null);
-  const ctaRefs = useRef<HTMLAnchorElement[]>([]);
+  const ctaRefs = useRef<HTMLElement[]>([]);
 
   const addToHeadingRefs = (el: HTMLSpanElement) => {
     if (el && !headingRefs.current.includes(el)) {
@@ -22,7 +23,7 @@ export default function FinalCTA() {
     }
   };
 
-  const addToCtaRefs = (el: HTMLAnchorElement) => {
+  const addToCtaRefs = (el: HTMLElement | null) => {
     if (el && !ctaRefs.current.includes(el)) {
       ctaRefs.current.push(el);
     }
@@ -205,22 +206,12 @@ export default function FinalCTA() {
           </p>
         </div>
 
-        {/* CTAs */}
-        <div className="flex flex-col items-center gap-8 md:gap-12 w-full max-w-xl mx-auto mb-16 md:mb-24">
-            <a 
-              href="https://www.youtube.com/@VMone" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              ref={addToCtaRefs}
-              className="group relative overflow-hidden flex items-center justify-center w-full py-6 md:py-8 border border-brand-gold bg-primary-dark text-brand-gold hover:border-brand-gold transition-colors duration-500 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-primary-dark"
-            >
-              <div className="absolute inset-0 bg-brand-gold origin-left scale-x-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-x-100" />
-              <span className="font-display font-bold text-lg md:text-2xl uppercase tracking-widest relative z-10 flex items-center gap-4 transition-colors duration-500 group-hover:text-primary-dark">
-                WATCH VMONE ON YOUTUBE
-                <ArrowRight className="w-6 h-6 transition-transform duration-500 group-hover:translate-x-2" />
-              </span>
-            </a>
-        </div>
+          {/* CTAs */}
+          <div className="flex flex-col items-center gap-8 md:gap-12 w-full max-w-xl mx-auto mb-16 md:mb-24">
+              <div ref={addToCtaRefs} className="w-full">
+                <SubscribeButton variant="cinematic" className="w-full py-6 md:py-8" />
+              </div>
+          </div>
       </div>
     </section>
   );
