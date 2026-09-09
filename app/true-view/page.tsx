@@ -42,7 +42,7 @@ export default function TrueViewPage() {
           {/* Hero */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
             <div className="lg:col-span-8 flex flex-col gap-6 md:gap-8">
-              <h1 className="font-display font-bold uppercase leading-[0.95] tracking-tight md:tracking-tighter text-[clamp(4rem,9vw,10rem)] text-brand-gold transition-colors duration-500">
+              <h1 className="font-display font-bold uppercase leading-[0.95] tracking-tight md:tracking-tighter text-[clamp(2.25rem,11vw,10rem)] text-brand-gold transition-colors duration-500">
                 THE UNCOMFORTABLE <span className="font-serif italic font-normal normal-case tracking-normal">Truth.</span>
               </h1>
             </div>

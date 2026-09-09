@@ -163,7 +163,7 @@ export default function TrueView() {
             <h2 className="font-display font-black uppercase leading-none tracking-tighter text-[clamp(4rem,10vw,12rem)] text-brand-gold">
               TRUE-VIEW.
             </h2>
-            <div className="font-display font-bold uppercase tracking-widest text-lg md:text-2xl lg:text-3xl text-brand-silver">
+            <div className="font-display font-bold uppercase tracking-widest text-sm md:text-2xl lg:text-3xl text-brand-silver">
               REAL PRODUCTS. REAL TESTING. <br className="md:hidden"/>UNCOMFORTABLE TRUTHS.
             </div>
           </div>
@@ -241,7 +241,7 @@ export default function TrueView() {
                 <span ref={addToHeadingRefs} className="block origin-bottom text-brand-gold">TRUE-VIEW.</span>
               </span>
             </h2>
-            <div ref={subHeadingRef} className="font-display font-bold uppercase tracking-tight text-xl md:text-3xl lg:text-4xl text-brand-gold leading-snug">
+            <div ref={subHeadingRef} className="font-display font-bold uppercase tracking-tight text-base md:text-3xl lg:text-4xl text-brand-gold leading-snug">
               REAL PRODUCTS. REAL TESTING. <span className="text-muted-light">UNCOMFORTABLE TRUTHS.</span>
             </div>
           </div>
