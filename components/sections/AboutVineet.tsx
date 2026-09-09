@@ -196,11 +196,11 @@ export default function AboutVineet() {
 
               <div className="w-full h-px bg-brand-silver/20 my-4" />
 
-              <div className="flex items-center gap-6 md:gap-8 pt-4">
-                <div className="font-display font-black text-6xl md:text-8xl tracking-tighter text-brand-gold leading-none">
+              <div className="flex flex-row items-center gap-4 md:gap-8 pt-4">
+                <div className="font-display font-black text-5xl md:text-6xl md:text-8xl tracking-tighter text-brand-gold leading-none">
                   {yearsOfExperience}+
                 </div>
-                <div className="flex flex-col justify-center text-sm md:text-base font-bold tracking-[0.25em] uppercase text-brand-silver">
+                <div className="flex flex-row md:flex-col flex-wrap gap-x-1.5 md:gap-0 justify-center text-xs md:text-sm md:text-base font-bold tracking-[0.25em] uppercase text-brand-silver">
                   <span>YEARS</span>
                   <span>TESTING</span>
                   <span>APPLIANCES</span>
@@ -285,11 +285,11 @@ export default function AboutVineet() {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row gap-6 md:gap-8 items-start border-y border-muted-light/50 py-10">
-              <div ref={experienceNumberRef} className="font-display text-7xl md:text-8xl font-bold tracking-tighter text-brand-gold leading-none">
+            <div className="flex flex-row lg:flex-col xl:flex-row gap-4 md:gap-8 items-center lg:items-start xl:items-center border-y border-muted-light/50 py-6 md:py-10">
+              <div ref={experienceNumberRef} className="font-display text-5xl md:text-7xl md:text-8xl font-bold tracking-tighter text-brand-gold leading-none">
                 {yearsOfExperience}+
               </div>
-              <div ref={experienceTextRef} className="flex flex-col justify-center text-sm md:text-base font-medium tracking-widest uppercase text-muted-light leading-relaxed">
+              <div ref={experienceTextRef} className="flex flex-row md:flex-col flex-wrap gap-x-1.5 md:gap-0 justify-center text-sm md:text-base font-medium tracking-widest uppercase text-muted-light leading-relaxed">
                 <span>YEARS</span>
                 <span>TESTING</span>
                 <span>APPLIANCES</span>

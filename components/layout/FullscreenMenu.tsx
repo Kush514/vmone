@@ -72,7 +72,7 @@ export default function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps)
   return (
     <div 
       className={`fixed inset-0 z-[100] ${pointerEventsClass}`}
-      aria-hidden={!isOpen}
+      inert={!isOpen ? true : undefined}
       role="dialog"
       aria-modal="true"
       aria-label="Fullscreen Navigation Menu"
